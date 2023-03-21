@@ -1,0 +1,23 @@
+@use '../abstracts' as *;
+
+:root {
+  @each $screen-size, $font-size in $type-scale {
+    @if $screen-size == small {
+      @each $size, $value in $font-size {
+        --font-size-#{$size}: #{$value};
+      }
+    } @else if $screen-size == medium {
+      @include mq(medium-screen) {
+        @each $size, $value in $font-size {
+          --font-size-#{$size}: #{$value};
+        }
+      }
+    } @else {
+      @include mq(large-screen) {
+        @each $size, $value in $font-size {
+          --font-size#{$size}: #{$value};
+        }
+      }
+    }
+  }
+}

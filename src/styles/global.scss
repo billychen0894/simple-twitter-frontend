@@ -1,0 +1,36 @@
+@use 'base' as *;
+@use 'abstracts' as *;
+
+.app-container {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.content-container {
+  display: flex;
+  flex: 2;
+}
+
+.main-content__setting {
+  flex: 1;
+}
+
+.main-content {
+  display: flex;
+  flex-basis: auto;
+}
+
+#modalOverlay {
+  display: flex;
+  justify-content: center;
+}
+
+@include mq(large-screen) {
+  .app-container {
+    max-width: 1140px;
+  }
+}

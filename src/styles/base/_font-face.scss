@@ -1,0 +1,57 @@
+@font-face {
+  font-family: 'Noto Sans TC';
+  font-weight: 300;
+  src: local('Noto Sans TC')
+      url('../../assets/fonts/notosanstc-light-webfont.woff2') format('woff2'),
+    local('Noto Sans Tc')
+      url('../../assets/fonts/notosanstc-light-webfont.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Noto Sans TC';
+  font-weight: 400;
+  src: local('Noto Sans TC')
+      url('../../assets/fonts/notosanstc-regular-webfont.woff2') format('woff2'),
+    local('Noto Sans Tc')
+      url('../../assets/fonts/notosanstc-regular-webfont.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Noto Sans TC';
+  font-weight: 500;
+  src: local('Noto Sans TC')
+      url('../../assets/fonts/notosanstc-medium-webfont.woff2') format('woff2'),
+    local('Noto Sans Tc')
+      url('../../assets/fonts/notosanstc-medium-webfont.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Noto Sans TC';
+  font-weight: 700;
+  src: local('Noto Sans TC')
+      url('../../assets/fonts/notosanstc-bold-webfont.woff2') format('woff2'),
+    local('Noto Sans Tc') url('../../assets/fonts/notosanstc-bold-webfont.woff')
+      format('woff');
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-weight: 400;
+  src: local('Montserrat')
+      url('../../assets/fonts/montserrat-regular-webfont.woff2') format('woff2'),
+    local('Montserrat')
+      url('../../assets/fonts/montserrat-regular-webfont.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-weight: 700;
+  src: local('Montserrat')
+      url('../../assets/fonts/montserrat-bold-webfont.woff2') format('woff2'),
+    local('Montserrat') url('../../assets/fonts/montserrat-bold-webfont.woff')
+      format('woff');
+}
+
+body {
+  font-family: 'Noto Sans TC', Montserrat, sans-serif;
+}
