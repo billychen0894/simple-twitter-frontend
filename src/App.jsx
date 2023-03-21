@@ -1,5 +1,7 @@
+import 'styles/global.scss';
+
 function App() {
-  return <div className="App">Hello World</div>;
+  return <div className="app-container">This is app container</div>;
 }
 
 export default App;
