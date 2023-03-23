@@ -1,0 +1,62 @@
+@use 'styles/abstracts' as *;
+
+.followersListItem {
+  width: 100%;
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover,
+  &:active {
+    background-color: var(--color-shades-300);
+  }
+}
+
+.followersContent {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.85rem;
+  align-items: center;
+}
+
+.followersInfoContainer {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.followersInfo {
+  max-width: rem(170);
+  white-space: nowrap;
+}
+
+.name,
+.username {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  font-size: var(--font-size-300);
+}
+
+.name {
+  color: var(--color-shades-1000);
+  font-weight: 700;
+  line-height: 26px;
+
+  &:hover,
+  &:active {
+    text-decoration: var(--color-shades-1000) underline 2px;
+  }
+}
+
+.username {
+  color: var(--color-shades-700);
+  font-size: var(--font-size-200);
+  font-weight: 500;
+}
+
+.followBtn {
+  max-width: 6rem;
+  padding: 0 1rem;
+  font-size: var(--font-size-300);
+  font-weight: 400;
+}
