@@ -1,7 +1,13 @@
+import { Route, Routes } from 'react-router-dom';
+import RootLayout from 'shared/pages/RootLayout';
 import 'styles/global.scss';
 
 function App() {
-  return <div className="app-container">This is app container</div>;
+  return (
+    <Routes>
+      <Route element={<RootLayout />} />
+    </Routes>
+  );
 }
 
 export default App;
