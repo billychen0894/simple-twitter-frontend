@@ -1,0 +1,39 @@
+@use 'styles/abstracts' as *;
+
+.followers {
+  display: none;
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  margin-right: 2rem;
+}
+
+.followersListContainer {
+  position: sticky;
+  top: 16px;
+  margin: 1rem 0;
+  padding: 0;
+  width: 100%;
+  min-height: 0;
+
+  h2 {
+    color: var(--color-shades-1000);
+    font-size: var(--font-size-500);
+    font-weight: 700;
+    padding: rem(24);
+  }
+}
+
+@include mq(small-medium-screen) {
+  .followers {
+    display: initial;
+    width: 250px;
+  }
+}
+
+@include mq(large-screen) {
+  .followers {
+    display: initial;
+    width: 273px;
+  }
+}
