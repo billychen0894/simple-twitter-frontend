@@ -1,0 +1,15 @@
+@use 'styles/abstracts/' as *;
+
+.mainHeader {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  min-width: rem(112);
+}
+
+@include mq(large-screen) {
+  .mainHeader {
+    flex: 1;
+    justify-content: flex-end;
+  }
+}

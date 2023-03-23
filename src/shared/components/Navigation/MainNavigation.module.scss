@@ -1,0 +1,118 @@
+@use 'styles/abstracts' as *;
+
+.mainNavigation {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  height: 100svh;
+  text-align: center;
+}
+
+.navLinksWrapper {
+  padding: 0 1rem;
+}
+
+.logoWrapper {
+  margin-top: 1rem;
+}
+
+.logo {
+  margin-bottom: rem(32);
+}
+
+.btnWrapper {
+  position: relative;
+  margin-top: rem(24);
+  height: 40px;
+  width: 40px;
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.tweetBtn {
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 99999px;
+}
+
+.navLinks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logout {
+  cursor: pointer;
+  color: var(--color-shades-900);
+  font-weight: 700;
+
+  svg {
+    height: 1.5em;
+    width: 1.5em;
+    position: relative;
+    top: 0.125em;
+
+    path {
+      stroke: var(--color-shades-900);
+    }
+  }
+}
+
+.logoutText {
+  display: none;
+}
+
+@include mq(large-screen) {
+  .mainNavigation {
+    width: rem(178);
+    text-align: initial;
+  }
+
+  .logo {
+    position: relative;
+    top: -5px;
+    left: -5px;
+  }
+
+  .logoWrapper {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  .logout {
+    display: flex;
+
+    svg {
+      margin-right: 1rem;
+      height: 1.25em;
+      width: 1.25em;
+    }
+  }
+
+  .btnWrapper {
+    text-align: center;
+    width: 100%;
+    height: auto;
+  }
+
+  .tweetBtn {
+    width: 100%;
+    padding: 1rem rem(24);
+  }
+
+  .logoutText {
+    display: initial;
+  }
+
+  .navLinks {
+    align-items: initial;
+  }
+}
