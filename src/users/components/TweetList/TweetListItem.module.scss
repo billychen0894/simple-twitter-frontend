@@ -1,0 +1,116 @@
+@use 'styles/abstracts' as *;
+
+// default reply list styling
+.container {
+  display: flex;
+  width: 100%;
+  padding: 1rem 1rem 0.5rem 1rem;
+  line-height: 1.5rem;
+  font-size: var(--font-size-300);
+  border-bottom: 1px solid #e6ecf0;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  transition: background-color 0.3s;
+  cursor: pointer;
+
+  &:hover,
+  &:active {
+    background-color: rgba(229, 229, 229, 0.3);
+  }
+}
+
+.tweetListItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.avatar {
+  align-items: start;
+  margin-right: 1rem;
+}
+
+.info {
+  display: flex;
+  gap: 0.5rem;
+  color: var(--color-secondary-300);
+  font-weight: 400;
+
+  .name,
+  .userName {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .userName {
+    font-size: var(--font-size-200);
+  }
+
+  .name {
+    display: block;
+    color: var(--color-shades-1000);
+    font-weight: 700;
+    font-size: var(--font-size-300);
+
+    &:hover,
+    &:active {
+      text-decoration: var(--color-shades-1000) underline 2px;
+    }
+  }
+}
+
+.contentContainer {
+  font-size: var(--font-size-300);
+  font-weight: 400;
+}
+
+.content {
+  display: block;
+  font-size: inherit;
+  font-weight: inherit;
+  margin-top: 0.5rem;
+}
+
+.ratingContainer {
+  display: flex;
+  gap: 3rem;
+}
+
+// userToReply styling
+.replyContainer {
+  display: flex;
+  gap: 0.25rem;
+  color: var(--color-shades-1000);
+}
+
+.user {
+  display: block;
+  color: var(--color-brand-300);
+  &:hover,
+  &:active {
+    text-decoration: var(--color-brand-300) underline 1px;
+  }
+}
+
+// otherUsersTweets styling
+.infoUsers {
+  margin-right: auto;
+  .userName {
+    color: var(--color-shades-1000);
+
+    &:hover,
+    &:active {
+      text-decoration: var(--color-shades-1000) underline 1px;
+    }
+  }
+}
+
+.infoBtn {
+  font-weight: 700;
+  line-height: rem(18);
+  padding: rem(5) rem(15);
+}
+
+.link {
+  text-decoration: none;
+}

@@ -1,0 +1,6 @@
+@use 'styles/abstracts' as *;
+
+.tweetList {
+  display: flex;
+  flex-direction: column;
+}
