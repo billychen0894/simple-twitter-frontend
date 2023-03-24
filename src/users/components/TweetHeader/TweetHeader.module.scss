@@ -1,0 +1,48 @@
+@use 'styles/abstracts' as *;
+
+.tweetHeader {
+  position: sticky;
+  z-index: 10;
+  top: 0px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: rem(55);
+  border-bottom: 1px solid #e6ecf0;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+}
+
+.tweetHeaderTitle {
+  font-weight: 700;
+  font-size: var(--font-size-500);
+  margin-left: 1.5rem;
+}
+
+.tweetHeaderLabel {
+  font-size: var(--font-size-400);
+}
+
+.tweetHeaderInfo {
+  font-weight: 400;
+  font-size: rem(13);
+  line-height: rem(15);
+  color: var(--color-secondary-300);
+}
+
+.tweetIcon {
+  min-width: rem(36);
+  min-height: rem(36);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0.5rem 0 1rem;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+
+  &:hover,
+  &:active {
+    background-color: var(--color-shades-400);
+  }
+}

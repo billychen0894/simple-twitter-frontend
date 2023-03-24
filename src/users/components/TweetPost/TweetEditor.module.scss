@@ -1,0 +1,32 @@
+.editorRoot {
+  position: relative;
+  top: 7px;
+  min-height: 2rem;
+  font-size: var(--font-size-400);
+  user-select: none;
+  cursor: text;
+}
+
+.placeholderContainer {
+  position: absolute;
+  z-index: 1;
+  padding: 2px 0;
+}
+
+.placeholder {
+  color: var(--color-secondary-300);
+}
+
+.editorContainer {
+  position: relative;
+  z-index: 1;
+  padding: 2px 0;
+  user-select: text;
+  font-size: var(--font-size-400);
+}
+
+.editor {
+  color: var(--color-shades-1000);
+  outline: none;
+  font-size: var(--font-size-400);
+}
