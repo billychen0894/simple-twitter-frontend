@@ -5,7 +5,8 @@
   position: relative;
   min-height: 100vh;
   min-height: 100svh;
-  margin-right: 2rem;
+  width: 100%;
+  max-width: 273px;
 }
 
 .followersListContainer {
@@ -24,7 +25,7 @@
   }
 }
 
-@include mq(small-medium-screen) {
+@include mq(medium-screen) {
   .followers {
     display: initial;
     width: 250px;

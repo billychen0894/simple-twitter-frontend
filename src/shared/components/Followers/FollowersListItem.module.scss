@@ -14,27 +14,36 @@
 .followersContent {
   display: flex;
   gap: 0.5rem;
-  padding: 0.85rem;
-  align-items: center;
+  padding: 1rem;
+  min-width: 0;
+  min-height: 0;
+}
+
+.avatar {
+  flex: 0 0 50px;
 }
 
 .followersInfoContainer {
   display: flex;
-  flex: 1;
   justify-content: space-between;
+  align-items: center;
+  flex: 1 0 0;
 }
 
 .followersInfo {
-  max-width: rem(170);
-  white-space: nowrap;
+  max-width: rem(70);
+  display: flex;
+  flex-direction: column;
+  flex: 0;
 }
 
 .name,
 .username {
   overflow: hidden;
   text-overflow: ellipsis;
-  display: block;
-  font-size: var(--font-size-300);
+  white-space: nowrap;
+  display: inline-block;
+  font-size: var(--font-size-200);
 }
 
 .name {
@@ -50,13 +59,40 @@
 
 .username {
   color: var(--color-shades-700);
-  font-size: var(--font-size-200);
+  font-size: var(--font-size-100);
   font-weight: 500;
 }
 
 .followBtn {
-  max-width: 6rem;
-  padding: 0 1rem;
-  font-size: var(--font-size-300);
+  width: rem(66);
+  min-height: rem(40);
+  padding: 0.5rem 1rem;
+  font-size: var(--font-size-200);
   font-weight: 400;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+.following {
+  min-width: rem(96);
+}
+
+@include mq(large-screen) {
+  .followersContent {
+    padding: 0.85rem;
+  }
+
+  .followBtn {
+    padding: 0 1rem;
+    font-size: var(--font-size-300);
+    font-weight: 400;
+  }
+
+  .name {
+    font-size: var(--font-size-300);
+  }
+
+  .username {
+    font-size: var(--font-size-200);
+  }
 }
