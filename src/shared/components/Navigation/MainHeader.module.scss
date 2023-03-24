@@ -4,12 +4,12 @@
   position: relative;
   display: flex;
   justify-content: flex-end;
-  min-width: rem(112);
+  min-width: rem(56);
 }
 
 @include mq(large-screen) {
   .mainHeader {
     flex: 1;
-    justify-content: flex-end;
+    width: rem(178);
   }
 }
