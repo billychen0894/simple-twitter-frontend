@@ -53,12 +53,11 @@
   cursor: pointer;
   color: var(--color-shades-900);
   font-weight: 700;
+  margin-bottom: 1rem;
 
   svg {
     height: 1.5em;
     width: 1.5em;
-    position: relative;
-    top: 0.125em;
 
     path {
       stroke: var(--color-shades-900);
@@ -109,7 +108,8 @@
   }
 
   .logoutText {
-    display: initial;
+    display: flex;
+    align-items: center;
   }
 
   .navLinks {

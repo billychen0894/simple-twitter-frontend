@@ -1,0 +1,55 @@
+@use 'styles/abstracts' as *;
+
+.tweetPost {
+  display: flex;
+  padding: 1.5rem;
+  width: 100%;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  line-height: 2rem;
+  font-size: var(--font-size-400);
+}
+
+.avatar {
+  align-items: start;
+  margin-right: 1rem;
+}
+
+.tweetPostContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  max-height: rem(720);
+  gap: 1rem;
+}
+
+.tweetBtnContainer {
+  flex: 1;
+  text-align: end;
+}
+
+.tweetBtn {
+  font-size: var(--font-size-300);
+  padding: 0.25rem 1rem;
+  background-color: var(--color-brand-300);
+  opacity: 0.5;
+  cursor: not-allowed;
+
+  &.active {
+    background-color: var(--color-brand-300);
+    opacity: 1;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--color-brand-100);
+    }
+  }
+}
+
+.divider {
+  border: none;
+  background-color: #e6ecf0;
+  opacity: 0.5;
+  height: 10px;
+  margin-bottom: 0;
+}
