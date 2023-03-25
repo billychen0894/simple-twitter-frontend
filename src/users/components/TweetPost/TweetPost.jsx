@@ -1,23 +1,20 @@
 import { useState } from 'react';
-import classNames from 'classnames/bind';
 
 import Avatar from 'shared/components/UIElements/Avatar';
 import Button from 'shared/components/UIElements/Button';
 import TweetEditor from 'users/components/TweetPost/TweetEditor';
 import styles from 'users/components/TweetPost/TweetPost.module.scss';
 
-const cx = classNames.bind(styles);
-
 function TweetPost({ placeholder, image }) {
   const [input, setInput] = useState('');
-
-  const buttonStyles = cx({
-    tweetBtn: true,
-    active: input !== '',
-  });
+  const [isTouched, setIsTouched] = useState(false);
 
   const handleInputChange = (e) => {
     setInput(e.target.textContent);
+  };
+
+  const handleInputTouch = () => {
+    setIsTouched(true);
   };
 
   return (
@@ -29,9 +26,18 @@ function TweetPost({ placeholder, image }) {
             placeholder={placeholder}
             onInputChange={handleInputChange}
             inputValue={input}
+            onInputTouch={handleInputTouch}
           />
           <div className={styles.tweetBtnContainer}>
-            <Button className={buttonStyles}>推文</Button>
+            {isTouched && input.length >= 140 && (
+              <span className={styles.errorText}>字數不可超過140字</span>
+            )}
+            <Button
+              disabled={input === '' || input.length >= 140}
+              className={styles.tweetBtn}
+            >
+              推文
+            </Button>
           </div>
         </div>
       </div>

@@ -31,18 +31,11 @@
 .tweetBtn {
   font-size: var(--font-size-300);
   padding: 0.25rem 1rem;
-  background-color: var(--color-brand-300);
-  opacity: 0.5;
   cursor: not-allowed;
 
-  &.active {
-    background-color: var(--color-brand-300);
-    opacity: 1;
+  &:hover {
+    background-color: var(--color-brand-100);
     cursor: pointer;
-
-    &:hover {
-      background-color: var(--color-brand-100);
-    }
   }
 }
 
@@ -52,4 +45,11 @@
   opacity: 0.5;
   height: 10px;
   margin-bottom: 0;
+}
+
+.errorText {
+  font-weight: 500;
+  font-size: rem(15);
+  color: var(--color-error-300);
+  margin-right: rem(20);
 }
