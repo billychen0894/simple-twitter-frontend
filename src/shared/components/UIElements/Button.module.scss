@@ -20,8 +20,8 @@
   &:disabled:hover,
   &:disabled:active {
     cursor: not-allowed;
-    background-color: #ccc;
-    color: #979797;
+    background-color: var(--color-mixed-100);
+    color: var(--color-shades-300);
   }
 }
 
