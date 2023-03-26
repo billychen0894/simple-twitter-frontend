@@ -44,11 +44,10 @@ export const usersList = [
   {
     userId: 'u1',
     name: 'John Doe',
-    userName: 'johndoe',
+    username: 'johndoe',
     profileStatus:
       'Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.',
-    profileHeaderImage:
-      'https://images.unsplash.com/photo-1673632156153-d3baf0d0401b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80',
+    profileHeaderImage: '',
     image: '',
     following: ['u2', 'u3'],
     followers: ['u2', 'u3', 'u4'],
@@ -56,7 +55,7 @@ export const usersList = [
   {
     userId: 'u2',
     name: 'user2',
-    userName: 'user2',
+    username: 'user2',
     profileStatus:
       'Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.',
     profileHeaderImage: '',
@@ -67,7 +66,7 @@ export const usersList = [
   {
     userId: 'u3',
     name: 'user3',
-    userName: 'user3',
+    username: 'user3',
     profileStatus:
       'Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.',
     profileHeaderImage: '',
@@ -78,7 +77,7 @@ export const usersList = [
   {
     userId: 'u4',
     name: 'user4',
-    userName: 'user4',
+    username: 'user4',
     profileStatus:
       'Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.',
     profileHeaderImage: '',
