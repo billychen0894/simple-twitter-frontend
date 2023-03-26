@@ -4,7 +4,7 @@ import TweetList from 'users/components/TweetList/TweetList';
 import TweetPost from 'users/components/TweetPost/TweetPost';
 import styles from 'users/pages/Home.module.scss';
 
-function Home() {
+function UserTweet() {
   const currUser = usersList.find((user) => user.userId === 'u1');
   const currUserFollowingList = currUser.following;
 
@@ -21,4 +21,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default UserTweet;

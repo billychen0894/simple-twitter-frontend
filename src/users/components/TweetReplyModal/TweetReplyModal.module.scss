@@ -1,0 +1,120 @@
+@use 'styles/abstracts' as *;
+
+.modalReplyContentContainer {
+  display: flex;
+  flex-direction: column;
+  font-size: var(--font-size-300);
+}
+
+.retweetAvatar,
+.userAvatar {
+  align-items: start;
+  margin-right: 1rem;
+}
+
+.retweetAvatar {
+  margin-bottom: rem(5);
+}
+.userAvatar {
+  margin-top: rem(5);
+}
+
+.avatarContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.outlineContainer {
+  display: flex;
+  flex-direction: column;
+  min-width: rem(56);
+}
+
+.outline {
+  margin: 0 0 0 rem(24);
+  width: rem(2);
+  flex: 1;
+  background: #ccd6dd;
+}
+
+.tweetPostContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 10rem;
+  max-height: rem(720);
+  gap: 1rem;
+}
+
+.input {
+  position: relative;
+  top: 13px;
+}
+
+.tweetReplyContainer,
+.replyToContainer {
+  display: flex;
+}
+
+.avatar {
+  cursor: pointer;
+  align-items: start;
+  margin-right: 1rem;
+}
+
+.info {
+  display: flex;
+  gap: 0.5rem;
+  color: #657786;
+  font-weight: 400;
+
+  .name,
+  .userName {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: rem(15);
+  }
+
+  .name {
+    display: block;
+    color: var(--color-shades-1000);
+    font-weight: 700;
+    cursor: pointer;
+
+    &:hover,
+    &:active {
+      text-decoration: var(--color-shades-1000) underline 2px;
+    }
+  }
+}
+
+.contentContainer {
+  font-size: var(--font-size-300);
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+
+.content {
+  display: block;
+  font-size: inherit;
+  font-weight: inherit;
+  margin-bottom: 0.5rem;
+}
+
+// userToReply styling
+.replyContainer {
+  display: flex;
+  gap: 0.25rem;
+  color: #657786;
+}
+
+.user {
+  display: block;
+  color: var(--color-brand-300);
+  cursor: pointer;
+  &:hover,
+  &:active {
+    text-decoration: var(--color-brand-300) underline 1px;
+  }
+}

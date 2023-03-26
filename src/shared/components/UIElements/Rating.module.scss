@@ -13,7 +13,7 @@
       fill: var(--color-mixed-200);
     }
     & .commentIcon + span {
-      color: var(--color-link-200);
+      color: var(--color-mixed-200);
     }
     & .likeIcon path {
       fill: var(--color-error-300);
@@ -38,6 +38,7 @@
   left: -10px;
   width: 2rem;
   height: 2rem;
+  font-size: var(--font-size-200);
   border-radius: 50%;
 
   svg {
