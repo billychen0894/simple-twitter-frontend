@@ -1,0 +1,163 @@
+@use 'styles/abstracts' as *;
+
+.userProfileHeader {
+  position: relative;
+}
+
+.headerImageContainer {
+  position: relative;
+  background-color: var(--color-secondary-100);
+
+  .headerImageBlock {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 33.3333%;
+  }
+
+  .headerImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+}
+
+.mainUserContent {
+  padding: 0 1rem;
+  font-size: var(--font-size-300);
+}
+
+.avatarAndBtnWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.avatarContainer {
+  position: relative;
+  min-width: 48px;
+  height: 100%;
+  width: 25%;
+  margin-top: -15%;
+  margin-bottom: 12px;
+}
+.avatarBlock {
+  width: 100%;
+  padding-bottom: 100%;
+}
+
+.avatar {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-shades-100);
+  border-radius: 99999px;
+
+  img,
+  .overlay,
+  .defaultAvatar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 99999px;
+    width: calc(100% - 6px);
+    height: calc(100% - 6px);
+  }
+}
+
+.btnWrapper {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  min-width: rem(128);
+  padding: 0.5rem 0;
+
+  .btn {
+    padding: 0.7rem 1rem;
+  }
+
+  svg {
+    margin-right: 0.5rem;
+    cursor: pointer;
+
+    &:hover,
+    &:active {
+      circle {
+        fill: var(--color-brand-300);
+      }
+      path {
+        fill: var(--color-shades-100);
+      }
+    }
+
+    & circle,
+    & path {
+      transition: fill 0.3s;
+    }
+  }
+}
+
+.userInfoWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: var(--font-size-300);
+  color: var(--color-secondary-300);
+}
+
+.usernames {
+  display: flex;
+  flex-direction: column;
+  font-weight: 400;
+  font-size: var(--font-size-200);
+  gap: 0.25rem;
+}
+
+.name {
+  color: var(--color-shades-1000);
+  font-weight: 700;
+  font-size: var(--font-size-400);
+}
+
+.userStatus {
+  color: var(--color-shades-1000);
+  font-size: var(--font-size-200);
+}
+
+.userRatingContainer {
+  display: flex;
+  gap: 1.5rem;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &:visited {
+      color: inherit;
+    }
+  }
+}
+
+.count {
+  color: var(--color-shades-1000);
+}
+
+.userFollowingCount,
+.userFollowersCount {
+  cursor: pointer;
+
+  &:hover,
+  &:active {
+    text-decoration: var(--color-shades-1000) underline 1px;
+    text-underline-offset: 3px;
+  }
+}

@@ -1,0 +1,50 @@
+.profileNavItem {
+  position: relative;
+  display: flex;
+  flex-basis: 20%;
+  flex-shrink: 0;
+  height: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover,
+  &:active {
+    background-color: rgba(229, 229, 229, 0.3);
+  }
+}
+
+.btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  color: #657786;
+  background: none;
+
+  &:hover,
+  &:active {
+    background: none;
+    color: var(--color-brand-300);
+  }
+}
+
+.labelContainer {
+  position: relative;
+  width: 100%;
+  text-align: center;
+}
+
+.btnTip {
+  position: absolute;
+  bottom: -18px;
+  height: 2px;
+  width: 100%;
+  background-color: var(--color-brand-300);
+  border-radius: 9999px;
+}

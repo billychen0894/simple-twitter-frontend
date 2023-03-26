@@ -34,15 +34,16 @@
   gap: 0.5rem;
   color: var(--color-secondary-300);
   font-weight: 400;
+  align-items: center;
 
   .name,
-  .userName {
+  .username {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  .userName {
+  .username {
     font-size: var(--font-size-200);
   }
 
@@ -80,7 +81,8 @@
 .replyContainer {
   display: flex;
   gap: 0.25rem;
-  color: var(--color-shades-1000);
+  color: var(--color-secondary-300);
+  font-size: var(--font-size-200);
 }
 
 .user {
@@ -95,7 +97,7 @@
 // otherUsersTweets styling
 .infoUsers {
   margin-right: auto;
-  .userName {
+  .username {
     color: var(--color-shades-1000);
 
     &:hover,
@@ -106,9 +108,8 @@
 }
 
 .infoBtn {
-  font-weight: 700;
   line-height: rem(18);
-  padding: rem(5) rem(15);
+  padding: 0.5rem 1rem;
 }
 
 .link {

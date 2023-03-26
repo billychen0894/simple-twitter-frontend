@@ -4,6 +4,7 @@ import OtherUsersTweetsListItem from 'users/components/TweetList/OtherUsersTweet
 import HomepageTweetListItem from 'users/components/TweetList/HomepageTweetListItem';
 import { usersList } from 'constants/constants';
 import styles from 'users/components/TweetList/TweetListItem.module.scss';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function TweetListItem({
   listType,
@@ -15,12 +16,34 @@ function TweetListItem({
   userToReply,
 }) {
   const currUser = 'u1';
+  const tweetId = 't1';
   const userInfo = usersList.find((user) => user.userId === userId);
   const inverse = userInfo.followers.includes(currUser);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleTweetReply = () => {
+    if (location && location.pathname === '/home') {
+      navigate(`/${userId}/reply/${tweetId}`);
+    }
+  };
+
+  const handleNavigateProfile = (e) => {
+    e.stopPropagation();
+    navigate(`/${userId}`);
+  };
 
   return (
-    <div className={styles.container}>
-      <Avatar className={styles.avatar} image={userInfo.image} />
+    <div
+      className={styles.container}
+      onClick={handleTweetReply}
+      role="presentation"
+    >
+      <Avatar
+        className={styles.avatar}
+        image={userInfo.image}
+        onClick={handleNavigateProfile}
+      />
       <div className={styles.tweetListItem}>
         {listType === 'userReply' ? (
           <UserReplyListItem
@@ -28,7 +51,8 @@ function TweetListItem({
             tweetContent={content}
             userToReply={userToReply}
             name={userInfo.name}
-            userName={userInfo.userName}
+            username={userInfo.username}
+            onNavigateProfile={handleNavigateProfile}
           />
         ) : undefined}
 
@@ -36,8 +60,9 @@ function TweetListItem({
           <OtherUsersTweetsListItem
             tweetContent={content}
             name={userInfo.name}
-            userName={userInfo.userName}
+            username={userInfo.username}
             inverse={!inverse}
+            onNavigateProfile={handleNavigateProfile}
           />
         ) : undefined}
 
@@ -48,7 +73,8 @@ function TweetListItem({
             commentCount={commentCount}
             likeCount={likeCount}
             name={userInfo.name}
-            userName={userInfo.userName}
+            username={userInfo.username}
+            onNavigateProfile={handleNavigateProfile}
           />
         ) : undefined}
       </div>

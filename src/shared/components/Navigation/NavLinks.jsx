@@ -9,11 +9,12 @@ import { ReactComponent as ActiveSettingIcon } from 'assets/icons/ActiveSettingI
 import styles from 'shared/components/Navigation/NavLinks.module.scss';
 
 function NavLinks() {
+  const userId = 'u1';
   return (
     <ul className={styles.navLinks}>
       <li>
         <NavLink
-          to="/home"
+          to="home"
           className={({ isActive }) => (isActive ? styles.active : undefined)}
         >
           {({ isActive }) => (
@@ -30,7 +31,7 @@ function NavLinks() {
       </li>
       <li>
         <NavLink
-          to="/profile"
+          to={`${userId}`}
           className={({ isActive }) => (isActive ? styles.active : undefined)}
         >
           {({ isActive }) => (
@@ -47,7 +48,7 @@ function NavLinks() {
       </li>
       <li>
         <NavLink
-          to="/setting"
+          to="setting"
           className={({ isActive }) => (isActive ? styles.active : undefined)}
         >
           {({ isActive }) => (

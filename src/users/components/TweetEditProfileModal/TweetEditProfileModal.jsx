@@ -3,6 +3,7 @@ import Input from 'shared/components/UIElements/Input';
 import Button from 'shared/components/UIElements/Button';
 import { ReactComponent as CameraIcon } from 'assets/icons/cameraIcon.svg';
 import { ReactComponent as CloseIcon } from 'assets/icons/closeIcon.svg';
+import defaultProfileHeaderImage from 'assets/images/defaultProfileHeaderImage.png';
 import useForm from 'hooks/useForm';
 import {
   VALIDATOR_MAXLENGTH,
@@ -39,7 +40,11 @@ function TweetEditProfileModal({ profileHeaderImage, avatar }) {
         <div className={styles.headerImageBlock} />
         <div
           className={styles.headerImage}
-          style={{ backgroundImage: `url(${profileHeaderImage})` }}
+          style={{
+            backgroundImage: `url(${
+              profileHeaderImage || defaultProfileHeaderImage
+            })`,
+          }}
         />
         <div className={styles.headerImageIconContainer}>
           <CameraIcon className={styles.cameraIcon} />
@@ -53,6 +58,7 @@ function TweetEditProfileModal({ profileHeaderImage, avatar }) {
             className={styles.avatar}
             overlayStyles={styles.overlay}
             image={avatar}
+            defaultAvatarStyle={styles.defaultAvatar}
           />
           <div className={styles.avatarIconContainer}>
             <CameraIcon className={styles.cameraIcon} />
