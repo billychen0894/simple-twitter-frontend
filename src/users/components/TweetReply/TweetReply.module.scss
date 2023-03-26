@@ -1,0 +1,120 @@
+@use 'styles/abstracts' as *;
+
+.tweetReplyPost {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1.5rem 0.25rem 1.5rem;
+  width: 100%;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  line-height: 2rem;
+  font-size: var(--font-size-300);
+  font-weight: 400;
+  border-bottom: 1px solid #e6ecf0;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+.avatar {
+  align-items: start;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  color: var(--color-secondary-300);
+  line-height: rem(19);
+
+  .name,
+  .username {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: var(--font-size-300);
+    flex: 1;
+  }
+
+  .name {
+    color: var(--color-shades-1000);
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+
+    &:hover,
+    &:active {
+      text-decoration: var(--color-shades-1000) underline 2px;
+    }
+  }
+}
+
+.tweetReplyPostContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  max-height: rem(720);
+  gap: 0.5rem;
+}
+
+.contentContainer {
+  font-size: var(--font-size-500);
+  font-weight: 400;
+  margin: 0.5rem 0;
+}
+
+.content {
+  display: block;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.timestamp {
+  color: var(--color-secondary-300);
+  line-height: 1rem;
+}
+
+.divider {
+  margin: 0;
+  border: 0.5px solid #e6ecf0;
+  width: 100%;
+}
+
+.ratingContainer {
+  display: flex;
+  gap: 0.5rem;
+  padding-left: 0.25rem;
+  color: var(--color-shades-1000);
+  font-weight: 700;
+  font-size: rem(19);
+  font-family: Montserrat, sans-serif;
+
+  .ratingText {
+    color: var(--color-secondary-500);
+    font-weight: 400;
+    margin-left: rem(6);
+  }
+}
+
+.iconsContainer {
+  display: flex;
+  padding-left: 0.25rem;
+  margin: 0.5rem 0;
+
+  svg {
+    width: 25px;
+    height: 25px;
+  }
+
+  .commentIcon {
+    margin-right: 7rem;
+  }
+
+  .likeIcon {
+    margin-right: auto;
+  }
+}

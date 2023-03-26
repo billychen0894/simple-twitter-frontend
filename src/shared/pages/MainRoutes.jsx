@@ -1,10 +1,11 @@
 import { Route, Routes } from 'react-router-dom';
 
 import RootLayout from 'shared/pages/RootLayout';
-import Home from 'users/pages/Home';
 import TweetModal from 'users/components/TweetModal/TweetModal';
 import UserProfile from 'userProfile/pages/UserProfile';
 import TweetList from 'users/components/TweetList/TweetList';
+import UserTweetReply from 'users/pages/UserTweetReply';
+import UserTweet from 'users/pages/UserTweet';
 import { replyList, tweetsList, usersList } from 'constants/constants';
 
 function MainRoutes({ location }) {
@@ -28,7 +29,10 @@ function MainRoutes({ location }) {
   return (
     <Routes location={location}>
       <Route element={<RootLayout />}>
-        <Route path="home" element={<Home />}>
+        <Route path="home" element={<UserTweet />}>
+          <Route path="compose/tweet" element={<TweetModal />} />
+        </Route>
+        <Route path="/:userId/reply/:tweetId" element={<UserTweetReply />}>
           <Route path="compose/tweet" element={<TweetModal />} />
         </Route>
         <Route path=":userId" element={<UserProfile />}>
