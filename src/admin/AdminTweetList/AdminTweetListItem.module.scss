@@ -1,0 +1,50 @@
+.tweetContainer {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  height: 5rem;
+  border: 1px solid #e6ecf0;
+  .closeIcon {
+    margin: 0 1rem;
+  }
+}
+
+.avatar {
+  flex: 0 0 50px;
+  margin: 0 1rem;
+  height: 3.125rem;
+  width: 3.125rem;
+}
+
+.avatar svg {
+  height: 3.125rem;
+  width: 3.125rem;
+}
+
+.info {
+  font-size: var(--font-size-300);
+}
+
+.name {
+  color: #1c1c1c;
+  font-weight: 700;
+  margin-right: 0.313em;
+  // font-size: var(--font-size-300);
+}
+
+.userName,
+.time {
+  font-weight: 500;
+  color: #657786;
+}
+
+
+
+.tweetCotent {
+  margin-top: 0.375rem;
+}
+
+.closeIcon svg {
+  border:1px solid tomato;
+  margin: 0 1rem;
+}
