@@ -1,7 +1,12 @@
 import Button from 'shared/components/UIElements/Button';
 import styles from 'users/components/TweetList/TweetListItem.module.scss';
 
-function OtherUsersTweetsListItem({ name, userName, tweetContent, inverse }) {
+function OtherUsersTweetsListItem({
+  name,
+  tweetContent,
+  inverse,
+  onNavigateProfile,
+}) {
   const button = inverse ? (
     <Button inverse className={styles.infoBtn}>
       跟隨
@@ -14,8 +19,13 @@ function OtherUsersTweetsListItem({ name, userName, tweetContent, inverse }) {
     <>
       <div className={styles.info}>
         <div className={styles.infoUsers}>
-          <span className={styles.name}>{name}</span>
-          <span className={styles.userName}>@{userName}</span>
+          <span
+            className={styles.name}
+            onClick={onNavigateProfile}
+            role="presentation"
+          >
+            {name}
+          </span>
         </div>
         <div className={styles.infoBtnContainer}>{button}</div>
       </div>

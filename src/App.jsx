@@ -1,9 +1,9 @@
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-import RootLayout from 'shared/pages/RootLayout';
-import Home from 'users/pages/Home';
 import ModalProvider from 'contexts/ModalContentContext';
-import TweetModal from 'users/components/TweetModal/TweetModal';
+import TweetModalRoute from 'users/pages/TweetModalRoute';
+import EditProfileModalRoute from 'users/pages/EditProfileModalRoute';
+import MainRoutes from 'shared/pages/MainRoutes';
 import 'styles/global.scss';
 
 function App() {
@@ -13,23 +13,9 @@ function App() {
 
   return (
     <ModalProvider>
-      {background && action === 'TWEET' && (
-        <Routes>
-          <Route path="compose/tweet" element={<TweetModal />} />
-        </Routes>
-      )}
-      {background && action === 'EDIT' && (
-        <Routes>
-          <Route path="edit_profile" element={<TweetModal />} />
-        </Routes>
-      )}
-      <Routes location={background || location}>
-        <Route element={<RootLayout />}>
-          <Route path="home/*" element={<Home />}>
-            <Route path="compose/tweet" element={<TweetModal />} />
-          </Route>
-        </Route>
-      </Routes>
+      {background && action === 'TWEET' && <TweetModalRoute />}
+      {background && action === 'EDIT' && <EditProfileModalRoute />}
+      <MainRoutes location={background || location} />
     </ModalProvider>
   );
 }
