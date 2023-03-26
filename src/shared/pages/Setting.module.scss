@@ -1,0 +1,35 @@
+@use 'styles/abstracts' as *;
+
+.settingContainer {
+  width: 100%;
+  margin-left: 2rem;
+  border: 1px solid #e6ecf0;
+}
+
+.settingHeader {
+  font-weight: 700;
+  font-size: var(--font-size-500);
+  border-bottom: 1px solid #e6ecf0;
+  padding: 1.5rem;
+}
+
+.formControl {
+  margin-right: 2rem;
+  padding: 2rem rem(23);
+  max-width: rem(642);
+}
+
+.input {
+  min-height: 100px;
+  margin: 0;
+  margin-top: 0.5rem;
+}
+
+.actionContainer {
+  font-size: rem(20);
+  text-align: end;
+}
+
+.formBtn {
+  padding: 0.8rem 1.5rem;
+}
