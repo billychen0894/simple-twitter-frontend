@@ -1,11 +1,13 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Avatar from 'shared/components/UIElements/Avatar';
 import Button from 'shared/components/UIElements/Button';
 import TweetEditor from 'users/components/TweetPost/TweetEditor';
 import styles from 'users/components/TweetPost/TweetPost.module.scss';
 
-function TweetPost({ placeholder, image }) {
+function TweetPost({ placeholder, image, userId }) {
+  const navigate = useNavigate();
   const [input, setInput] = useState('');
   const [isTouched, setIsTouched] = useState(false);
 
@@ -17,10 +19,19 @@ function TweetPost({ placeholder, image }) {
     setIsTouched(true);
   };
 
+  const handleNavigateProfile = (e) => {
+    e.stopPropagation();
+    navigate(`/${userId}`);
+  };
+
   return (
     <>
       <div className={styles.tweetPost}>
-        <Avatar image={image} className={styles.avatar} />
+        <Avatar
+          image={image}
+          className={styles.avatar}
+          onClick={handleNavigateProfile}
+        />
         <div className={styles.tweetPostContainer}>
           <TweetEditor
             placeholder={placeholder}

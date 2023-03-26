@@ -2,12 +2,15 @@ import styles from 'shared/components/UIElements/Rating.module.scss';
 import { ReactComponent as CommentIcon } from 'assets/icons/commentIcon.svg';
 import { ReactComponent as LikeIcon } from 'assets/icons/likeIcon.svg';
 
-function Rating({ className, comment, like, ratingCount, onClick }) {
+function Rating({ className, comment, like, ratingCount, onClick, style }) {
   let icon;
 
   if (comment) {
     icon = (
-      <div className={`${styles.iconContainer} ${styles.commentIcon}`}>
+      <div
+        className={`${styles.iconContainer} ${styles.commentIcon}`}
+        style={style}
+      >
         <CommentIcon />
       </div>
     );
@@ -15,7 +18,10 @@ function Rating({ className, comment, like, ratingCount, onClick }) {
 
   if (like) {
     icon = (
-      <div className={`${styles.iconContainer} ${styles.likeIcon}`}>
+      <div
+        className={`${styles.iconContainer} ${styles.likeIcon}`}
+        style={style}
+      >
         <LikeIcon />
       </div>
     );
