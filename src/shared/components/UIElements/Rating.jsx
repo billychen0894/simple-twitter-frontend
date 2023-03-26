@@ -2,7 +2,7 @@ import styles from 'shared/components/UIElements/Rating.module.scss';
 import { ReactComponent as CommentIcon } from 'assets/icons/commentIcon.svg';
 import { ReactComponent as LikeIcon } from 'assets/icons/likeIcon.svg';
 
-function Rating({ className, comment, like, ratingCount }) {
+function Rating({ className, comment, like, ratingCount, onClick }) {
   let icon;
 
   if (comment) {
@@ -22,7 +22,11 @@ function Rating({ className, comment, like, ratingCount }) {
   }
 
   return (
-    <div className={`${styles.ratingContainer} ${className}`}>
+    <div
+      className={`${styles.ratingContainer} ${className}`}
+      onClick={onClick}
+      role="presentation"
+    >
       {icon}
       <span className={styles.ratingCount}>{ratingCount}</span>
     </div>
