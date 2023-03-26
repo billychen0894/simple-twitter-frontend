@@ -52,7 +52,6 @@ function Setting() {
                 : '請填寫帳號'
             }
             inputStyles={styles.input}
-            inputInlineStyle={{ height: '54px' }}
           />
           <Input
             id="name"
@@ -68,7 +67,6 @@ function Setting() {
                 : '請填寫名稱'
             }
             inputStyles={styles.input}
-            inputInlineStyle={{ height: '54px' }}
           />
           <Input
             id="email"
@@ -84,7 +82,6 @@ function Setting() {
                 : '請填寫Email'
             }
             inputStyles={styles.input}
-            inputInlineStyle={{ height: '54px' }}
           />
           <Input
             id="password"
@@ -100,7 +97,6 @@ function Setting() {
                 : '請輸入密碼'
             }
             inputStyles={styles.input}
-            inputInlineStyle={{ height: '54px' }}
           />
           <Input
             id="passwordVerify"
@@ -116,7 +112,6 @@ function Setting() {
             onInput={handleInput}
             errorText="密碼不一致"
             inputStyles={styles.input}
-            inputInlineStyle={{ height: '54px' }}
           />
           <div className={styles.actionContainer}>
             <Button
