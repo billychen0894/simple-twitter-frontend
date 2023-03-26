@@ -13,6 +13,7 @@ function Button({
   inverse,
   className,
   state,
+  replace,
 }) {
   const cx = classnames.bind(styles);
   const classNames = cx({
@@ -36,6 +37,7 @@ function Button({
         state={state}
         onClick={onClick}
         end
+        replace={replace}
       >
         {children}
       </NavLink>
