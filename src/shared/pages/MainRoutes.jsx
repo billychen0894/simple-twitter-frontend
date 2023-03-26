@@ -8,6 +8,9 @@ import UserTweetReply from 'users/pages/UserTweetReply';
 import UserTweet from 'users/pages/UserTweet';
 import { replyList, tweetsList, usersList } from 'constants/constants';
 import Setting from './Setting';
+import Login from './Login';
+import Register from './Register';
+import AdminLogin from './AdminLogin';
 
 function MainRoutes({ location }) {
   const userInfo = usersList.find((user) => user.userId === 'u1');
@@ -29,6 +32,9 @@ function MainRoutes({ location }) {
 
   return (
     <Routes location={location}>
+      <Route path="login" element={<Login />} />
+      <Route path="admin_login" element={<AdminLogin />} />
+      <Route path="register" element={<Register />} />
       <Route element={<RootLayout />}>
         <Route path="setting" element={<Setting />} />
         <Route path="home" element={<UserTweet />}>
