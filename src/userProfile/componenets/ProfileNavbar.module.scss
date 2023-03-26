@@ -1,0 +1,9 @@
+@use 'styles/abstracts/' as *;
+
+.profileNavbar {
+  display: flex;
+  height: rem(52);
+  font-size: rem(15);
+  font-weight: 400;
+  border-bottom: 1px solid #e6ecf0;
+}
