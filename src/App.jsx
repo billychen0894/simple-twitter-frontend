@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
 
 import ModalProvider from 'contexts/ModalContentContext';
+import { AuthProvider } from 'contexts/AuthContext';
 import TweetModalRoute from 'users/pages/TweetModalRoute';
 import EditProfileModalRoute from 'users/pages/EditProfileModalRoute';
 import MainRoutes from 'shared/pages/MainRoutes';
@@ -12,11 +13,13 @@ function App() {
   const action = location.state?.action;
 
   return (
-    <ModalProvider>
-      {background && action === 'TWEET' && <TweetModalRoute />}
-      {background && action === 'EDIT' && <EditProfileModalRoute />}
-      <MainRoutes location={background || location} />
-    </ModalProvider>
+    <AuthProvider>
+      <ModalProvider>
+        {background && action === 'TWEET' && <TweetModalRoute />}
+        {background && action === 'EDIT' && <EditProfileModalRoute />}
+        <MainRoutes location={background || location} />
+      </ModalProvider>
+    </AuthProvider>
   );
 }
 

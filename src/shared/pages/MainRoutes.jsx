@@ -7,10 +7,10 @@ import TweetList from 'users/components/TweetList/TweetList';
 import UserTweetReply from 'users/pages/UserTweetReply';
 import UserTweet from 'users/pages/UserTweet';
 import { replyList, tweetsList, usersList } from 'constants/constants';
-import Setting from './Setting';
-import Login from './Login';
-import Register from './Register';
-import AdminLogin from './AdminLogin';
+import Setting from 'shared/pages/Setting';
+import Login from 'shared/pages/Login';
+import Register from 'shared/pages/Register';
+import AdminLogin from 'shared/pages/AdminLogin';
 
 function MainRoutes({ location }) {
   const userInfo = usersList.find((user) => user.userId === 'u1');
