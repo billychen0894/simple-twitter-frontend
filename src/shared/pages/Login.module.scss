@@ -24,6 +24,10 @@
 .formControl {
   .input {
     margin: 2rem 0;
+
+    &.formInvalid input {
+      border-bottom: 2px solid var(--color-error-300);
+    }
   }
 
   .actionContainer {
