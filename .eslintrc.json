@@ -9,7 +9,14 @@
     "plugin:react/recommended",
     "plugin:prettier/recommended"
   ],
-  "overrides": [],
+  "overrides": [
+    {
+      "files": ["config-overrides.js"],
+      "rules": {
+        "no-console": "off"
+      }
+    }
+  ],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
@@ -23,6 +30,9 @@
     "import/resolver": {
       "node": {
         "paths": ["src"]
+      },
+      "webpack": {
+        "config": "config/webpack.config.js"
       }
     }
   }
