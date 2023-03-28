@@ -13,6 +13,8 @@ import {
 import useForm from 'hooks/useForm';
 import styles from 'shared/pages/Login.module.scss';
 import 'styles/global.scss';
+import { useAuth } from 'contexts/AuthContext';
+import { useState } from 'react';
 
 function Register() {
   const initialFormInputs = {
@@ -39,8 +41,31 @@ function Register() {
   };
 
   const [formState, handleInput] = useForm(initialFormInputs, false);
+  const { register } = useAuth();
+  const [registerError, setRegisterError] = useState(false);
 
-  // NEED TO WORK ON PASSWORD VERIFY VALIDATION
+  const handleAccountRegister = async (e) => {
+    e.preventDefault();
+
+    if (!formState.formIsValid) {
+      return;
+    }
+
+    const response = await register({
+      account: formState.inputs.account.val,
+      email: formState.inputs.email.val,
+      name: formState.inputs.name.val,
+      password: formState.inputs.password.val,
+      checkPassword: formState.inputs.passwordVerify.val,
+    });
+
+    const { status } = response;
+
+    if (status === 'error') {
+      setRegisterError(true);
+    }
+  };
+
   return (
     <div className="app-container">
       <div className={styles.registerContainer}>
@@ -49,7 +74,7 @@ function Register() {
           <h2>建立你的帳號</h2>
         </div>
         <div className={styles.formControl}>
-          <form action="">
+          <form onSubmit={handleAccountRegister}>
             <Input
               id="account"
               label="帳號"
@@ -63,7 +88,10 @@ function Register() {
                   ? '帳號不能超過16個字數'
                   : '請填寫帳號'
               }
-              inputStyles={styles.input}
+              inputStyles={`${styles.input} ${
+                registerError ? styles.formInvalid : undefined
+              }`}
+              onInputChangeStyle={setRegisterError}
             />
             <Input
               id="name"
@@ -78,7 +106,10 @@ function Register() {
                   ? '名稱不能超過12個字數'
                   : '請填寫名稱'
               }
-              inputStyles={styles.input}
+              inputStyles={`${styles.input} ${
+                registerError ? styles.formInvalid : undefined
+              }`}
+              onInputChangeStyle={setRegisterError}
             />
             <Input
               id="email"
@@ -93,7 +124,10 @@ function Register() {
                   ? '請輸入正確的Email格式'
                   : '請填寫Email'
               }
-              inputStyles={styles.input}
+              inputStyles={`${styles.input} ${
+                registerError ? styles.formInvalid : undefined
+              }`}
+              onInputChangeStyle={setRegisterError}
             />
             <Input
               id="password"
@@ -108,7 +142,10 @@ function Register() {
                   ? '密碼不能超過16個字數'
                   : '請輸入密碼'
               }
-              inputStyles={styles.input}
+              inputStyles={`${styles.input} ${
+                registerError ? styles.formInvalid : undefined
+              }`}
+              onInputChangeStyle={setRegisterError}
             />
             <Input
               id="passwordVerify"
@@ -123,10 +160,15 @@ function Register() {
               ]}
               onInput={handleInput}
               errorText="密碼不一致"
-              inputStyles={styles.input}
+              inputStyles={`${styles.input} ${
+                registerError ? styles.formInvalid : undefined
+              }`}
+              onInputChangeStyle={setRegisterError}
             />
             <div className={styles.actionContainer}>
-              <Button className={styles.formBtn}>註冊</Button>
+              <Button type="submit" className={styles.formBtn}>
+                註冊
+              </Button>
               <Link to="/login" className={styles.formLink}>
                 取消
               </Link>

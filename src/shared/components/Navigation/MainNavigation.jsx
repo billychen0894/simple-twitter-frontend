@@ -10,6 +10,7 @@ import { ReactComponent as LogoutIcon } from 'assets/icons/logoutIcon.svg';
 import { ReactComponent as TweetPostBtn } from 'assets/icons/tweetIcon.svg';
 import { ModalContentContext } from 'contexts/ModalContentContext';
 import styles from 'shared/components/Navigation/MainNavigation.module.scss';
+import { useAuth } from 'contexts/AuthContext';
 
 function MainNavigation() {
   const location = useLocation();
@@ -36,6 +37,11 @@ function MainNavigation() {
     };
   }, []);
 
+  const { logout } = useAuth();
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <MainHeader>
       <div className={styles.mainNavigation}>
@@ -57,7 +63,11 @@ function MainNavigation() {
             </Button>
           </div>
         </div>
-        <div className={styles.logout}>
+        <div
+          className={styles.logout}
+          onClick={handleLogout}
+          role="presentation"
+        >
           <div className={styles.logoutIcon}>
             <LogoutIcon />
           </div>

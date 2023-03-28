@@ -1,4 +1,7 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+// import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { ReactComponent as SiteLogo } from 'assets/icons/logoIcon.svg';
 import Input from 'shared/components/UIElements/Input';
@@ -8,6 +11,7 @@ import {
   VALIDATOR_REQUIRE,
 } from 'shared/utils/validators';
 import useForm from 'hooks/useForm';
+import { useAuth } from 'contexts/AuthContext';
 import styles from 'shared/pages/Login.module.scss';
 import 'styles/global.scss';
 
@@ -24,6 +28,34 @@ function Login() {
   };
 
   const [formState, handleInput] = useForm(initialFormInputs, false);
+  const { userLogin, isAuthenticated } = useAuth();
+  const [loginError, setLoginError] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // this condition should also add role === 'user'
+    if (isAuthenticated) {
+      navigate('/home');
+    }
+  }, [isAuthenticated, navigate]);
+
+  const handleUserLogin = async (e) => {
+    e.preventDefault();
+
+    if (!formState.formIsValid) {
+      return;
+    }
+
+    const response = await userLogin({
+      account: formState.inputs.account.val,
+      password: formState.inputs.password.val,
+    });
+
+    const { status } = response;
+    if (status === 'error') {
+      setLoginError(true);
+    }
+  };
 
   return (
     <div className="app-container">
@@ -33,7 +65,7 @@ function Login() {
           <h2>登入&nbsp;Alphitter</h2>
         </div>
         <div className={styles.formControl}>
-          <form action="">
+          <form onSubmit={handleUserLogin}>
             <Input
               id="account"
               label="帳號"
@@ -47,7 +79,10 @@ function Login() {
                   ? '帳號不能超過16個字數'
                   : '請填寫帳號'
               }
-              inputStyles={styles.input}
+              inputStyles={`${styles.input} ${
+                loginError ? styles.formInvalid : undefined
+              }`}
+              onInputChangeStyle={setLoginError}
             />
             <Input
               id="password"
@@ -62,10 +97,15 @@ function Login() {
                   ? '密碼不能超過16個字數'
                   : '請輸入密碼'
               }
-              inputStyles={styles.input}
+              inputStyles={`${styles.input} ${
+                loginError ? styles.formInvalid : undefined
+              }`}
+              onInputChangeStyle={setLoginError}
             />
             <div className={styles.actionContainer}>
-              <Button className={styles.formBtn}>登入</Button>
+              <Button className={styles.formBtn} type="submit">
+                登入
+              </Button>
               <div className={styles.formLinkContainer}>
                 <Link to="/register" className={styles.formLink}>
                   註冊Alphitter
