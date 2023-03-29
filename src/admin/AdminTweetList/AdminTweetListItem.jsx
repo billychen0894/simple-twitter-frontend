@@ -2,23 +2,20 @@ import Avatar from 'shared/components/UIElements/Avatar';
 import styles from 'admin/AdminTweetList/AdminTweetListItem.module.scss';
 import { ReactComponent as CloseIcon } from 'assets/icons/closeIcon.svg';
 
-function AdminTweetListItem() {
+function AdminTweetListItem({ name, userName, content, time }) {
   return (
     <div className={styles.tweetContainer}>
       <Avatar className={styles.avatar} />
       <div className={styles.info}>
-        <span className={styles.name}>Apple</span>
-        <span className={styles.userName}>@apple</span>
+        <span className={styles.name}>{name}</span>
+        <span className={styles.userName}>@{userName}</span>
         <span>·</span>
-        <span className={styles.time}>3小時</span>
-        <p className={styles.tweetCotent}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing...
-        </p>
+        <span className={styles.time}>{time}</span>
+        <p className={styles.tweetContent}>{content}</p>
       </div>
-      {/* <div className={styles.contentContainer}>
-        
-      </div> */}
-      <CloseIcon className={styles.closeIcon} />
+      <div className={`${styles.iconContainer} ${styles.closeIcon}`}>
+        <CloseIcon />
+      </div>
     </div>
   );
 }

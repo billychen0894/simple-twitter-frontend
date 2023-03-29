@@ -1,6 +1,6 @@
 import { ReactComponent as LikeIcon } from 'assets/icons/likeIcon.svg';
 import { ReactComponent as CommentIcon } from 'assets/icons/commentIcon.svg';
-import styles from 'shared/components/AdminUserCard/AdminUserCard.module.scss';
+import styles from 'admin/AdminUserCard/AdminUserCardItem.module.scss';
 import Avatar from 'shared/components/UIElements/Avatar';
 import Card from 'shared/components/UIElements/Card';
 import UserBanner from 'shared/components/UIElements/UserBanner';
@@ -8,9 +8,16 @@ import UserBanner from 'shared/components/UIElements/UserBanner';
 function AdminUserCard() {
   return (
     <Card className={styles.cardContainer}>
-      <UserBanner />
+      <UserBanner className={styles.banner} />
       <div className={styles.userInfo}>
-        <Avatar className={styles.avatar} />
+        <div className={styles.avatarWrapper}>
+          <Avatar
+            className={styles.avatar}
+            overlayStyles={styles.overlay}
+            // image={avatar}
+            defaultAvatarStyle={styles.defaultAvatar}
+          />
+        </div>
         <h1 className={styles.userName}>John Doe</h1>
         <h2 className={styles.userAccountName}>@hellojohn</h2>
         <div className={styles.tweetsRelatedCount}>

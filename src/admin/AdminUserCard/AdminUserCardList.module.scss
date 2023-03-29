@@ -1,0 +1,25 @@
+h2 {
+  font-size: var(--font-size-400);
+  margin: 1rem 1.625rem;
+}
+
+.AdminCards{
+  border: 1px solid tomato;
+  min-height: 100vh;
+  min-height: 100svh;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.cardContainer {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border: 1px solid royalblue;
+}
+
+.carcardItemd {
+  margin: 0 1rem 1rem 0;
+}

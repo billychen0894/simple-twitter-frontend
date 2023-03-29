@@ -1,0 +1,75 @@
+@use 'styles/abstracts' as *;
+
+.navLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+
+  a {
+    text-decoration: none;
+    color: var(--color-shades-900);
+    font-size: var(--font-size-400);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+
+    .iconWrapper svg {
+      height: 1.5em;
+      width: 1.5em;
+
+      path {
+        fill: #000000;
+      }
+    }
+
+    &:hover,
+    &:active {
+      & {
+        color: var(--color-brand-300);
+      }
+
+      svg path {
+        fill: var(--color-brand-300);
+      }
+    }
+
+    &.active {
+      color: var(--color-brand-300);
+
+      svg path {
+        fill: var(--color-brand-300);
+      }
+    }
+  }
+}
+
+.textWrapper {
+  display: none;
+}
+
+@include mq(large-screen) {
+  .navLinks {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+
+    a {
+      display: flex;
+
+      .iconWrapper svg {
+        margin-right: 1rem;
+        height: 1.25em;
+        width: 1.25em;
+      }
+    }
+  }
+
+  .textWrapper {
+    display: initial;
+  }
+}

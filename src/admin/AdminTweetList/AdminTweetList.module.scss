@@ -1,0 +1,23 @@
+@use 'styles/abstracts' as *;
+
+.AdminTweets{
+  min-height: 100vh;
+  min-height: 100svh;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.adminTweetListContainer{
+  width: 100%;
+}
+
+h2 {
+  font-size: var(--font-size-400);
+  margin: 1rem 1.625rem;
+}
+
+@include mq(large-screen) {
+  .adminTweetListContainer {
+      width: rem(178);
+    }
+}

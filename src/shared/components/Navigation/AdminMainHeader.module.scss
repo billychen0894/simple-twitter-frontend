@@ -1,0 +1,15 @@
+@use 'styles/abstracts/' as *;
+
+.AdminMainHeader {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  min-width: rem(56);
+}
+
+@include mq(large-screen) {
+  .mainHeader {
+    flex: 1;
+    width: rem(178);
+  }
+}
