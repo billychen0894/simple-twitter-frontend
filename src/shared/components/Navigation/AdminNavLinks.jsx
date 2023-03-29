@@ -11,7 +11,7 @@ function AdminNavLinks() {
     <ul className={styles.navLinks}>
       <li>
         <NavLink
-          to="admin-main"
+          to="admin_main"
           className={({ isActive }) => (isActive ? styles.active : undefined)}
         >
           {({ isActive }) => (
@@ -28,7 +28,7 @@ function AdminNavLinks() {
       </li>
       <li>
         <NavLink
-          to="admin-user"
+          to="admin_user_list"
           className={({ isActive }) => (isActive ? styles.active : undefined)}
         >
           {({ isActive }) => (

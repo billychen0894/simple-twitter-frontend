@@ -1,25 +1,35 @@
-h2 {
-  font-size: var(--font-size-400);
-  margin: 1rem 1.625rem;
-}
+@use 'styles/abstracts' as *;
 
 .AdminCards{
-  border: 1px solid tomato;
+  border: 1px solid #E6ECF0;
   min-height: 100vh;
   min-height: 100svh;
-  width: 100%;
-  max-width: 1000px;
+  width: 75rem;
+  overflow: hidden;
 }
 
 .cardContainer {
-  width: 100%;
-  max-width: 1000px;
+  width: 40%;
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
-  border: 1px solid royalblue;
+  justify-content: space-between;
+  overflow: scroll;
 }
 
-.carcardItemd {
-  margin: 0 1rem 1rem 0;
+@include mq(small-medium-screen) {
+  .cardContainer {
+    width: 65%;
+  }
+}
+
+@include mq(medium-screen) {
+  .cardContainer {
+    width: 80%;
+  }
+}
+
+@include mq(large-screen) {
+  .cardContainer {
+    width: 94%;
+  }
 }

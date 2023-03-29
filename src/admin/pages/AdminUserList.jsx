@@ -1,12 +1,18 @@
 import AdminNavigation from 'shared/components/Navigation/AdminNavigation';
+import AdminHeader from 'admin/AdminHeader/AdminHeader';
 import AdminUserCardList from 'admin/AdminUserCard/AdminUserCardList';
 import styles from 'admin/pages/AdminMain.module.scss';
 
 function AdminUserList() {
   return (
-    <div className={styles.container}>
-      <AdminNavigation className={styles.navigation} />
-      <AdminUserCardList calssName={styles.cardList} />
+    <div className={styles.adminUserContainer}>
+      <div className={styles.container}>
+        <AdminNavigation className={styles.navigation} />
+        <div className={styles.main}>
+          <AdminHeader AdminUser className={styles.AdminHeader} />
+          <AdminUserCardList className={styles.list} />
+        </div>
+      </div>
     </div>
   );
 }

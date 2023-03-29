@@ -1,3 +1,5 @@
+@use 'styles/abstracts' as *;
+
 .tweetContainer {
   position: relative;
   display: flex;
@@ -44,7 +46,7 @@
 }
 
 .tweetContent {
-  width: 90%;
+  width: 65%;
   margin-top: 0.5rem;
   word-wrap: break-word;
   white-space: pre-wrap;
@@ -71,3 +73,10 @@
       }
     }
   }
+
+
+ @include mq(large-screen) {
+  .tweetContent {
+    width: 100%;
+  }
+}

@@ -1,22 +1,18 @@
-import { useState } from 'react';
-import AdminNavigation from 'shared/components/Navigation/AdminNavigation';
-import styles from 'admin/pages/AdminRootLayout/AdminRootLayout.module.scss'
-import AdminTweetList from 'admin/AdminTweetList/AdminTweetList';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import AdminMain from 'admin/pages/AdminMain';
+import AdminUserList from 'admin/pages/AdminUserList';
 
-function AdminLayout(AdminUserCardList) {
-  const [header, setHeader] = useState('推文清單');
-  if (AdminUserCardList) {
-    return (
-      setHeader('使用者列表');
-    );
-  }
+function AdminRoute() {
   return (
-    <div className="container">
-      <AdminNavigation />
-      <h2 className={styles.header}>{header}</h2>
-      <AdminTweetList />
+    <div className="routComtainer">
+      <BrowserRouter>
+        <Routes>
+          <Route path="admin_main" element={<AdminMain />} />
+          <Route path="admin_user_list" element={<AdminUserList />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
 
-export default AdminLayout;
+export default AdminRoute;

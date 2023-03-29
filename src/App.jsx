@@ -5,11 +5,10 @@ import ModalProvider from 'contexts/ModalContentContext';
 // import EditProfileModalRoute from 'users/pages/EditProfileModalRoute';
 // import MainRoutes from 'shared/pages/MainRoutes';
 import 'styles/global.scss';
-// import AdminUserCardList from 'admin/AdminUserCard/AdminUserCardList';
-import AdminUserCardItem from 'admin/AdminUserCard/AdminUserCardItem';
-// import AdminUsersLayout from 'admin/pages/AdminUsersLayout';
+// import AdminUserCardItem from 'admin/AdminUserCard/AdminUserCardItem';
+// import AdminHeader from 'admin/AdminHeader/AdminHeader';
+import AdminUserList from 'admin/pages/AdminUserList';
 // import AdminTweetList from 'admin/AdminTweetList/AdminTweetList';
-// import AdminNavLinks from 'shared/components/Navigation/AdminNavLinks';
 
 function App() {
   // const location = useLocation();
@@ -21,7 +20,7 @@ function App() {
       {/* {background && action === 'TWEET' && <TweetModalRoute />}
       {background && action === 'EDIT' && <EditProfileModalRoute />} */}
       <Routes>
-        <Route path="admin" element={<AdminUserCardItem />} />
+        <Route path="admin_main" element={<AdminUserList />} />
         {/* <Route path="adminuser" element={<AdminUserCardList />} /> */}
       </Routes>
       {/* <MainRoutes location={background || location} /> */}

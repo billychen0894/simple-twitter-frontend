@@ -10,7 +10,7 @@ function AdminNavigation() {
     <AdminMainHeader>
       <div className={styles.adminNavigationContainter}>
         <div className={styles.adminNavLinks}>
-          <NavLink to="/nav-main" className={styles.logoWrapper}>
+          <NavLink to="/admin_main" className={styles.logoWrapper}>
             <SiteLogo />
           </NavLink>
           <nav className={styles.adminNavLinksWrapper}>

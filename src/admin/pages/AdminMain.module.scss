@@ -1,5 +1,28 @@
+@use 'styles/abstracts' as *;
+
 .container {
-  width: 100%;
+  max-width: 90vw;
   display: flex;
-  justify-content: space-between;
+  position: absolute;
+}
+
+.main {
+  width: 75rem;
+  height: 100vh;
+  position: fixed;
+  left: 14rem;
+}
+.navigation {
+  margin-right: 3rem;
+}
+.header {
+  width: 100%;
+}
+
+@include mq(large-screen) {
+  .main {
+    width: 100%;
+    position: fixed;
+    left: 20rem;
+  }
 }
