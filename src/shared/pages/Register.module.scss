@@ -1,0 +1,56 @@
+.registerContainer {
+  margin-top: 3rem;
+  width: 80vw;
+  width: 80svw;
+  max-width: 550px;
+}
+
+.registerHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  h2 {
+    font-size: var(--font-size-600);
+  }
+
+  svg {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.formControl {
+  .input {
+    margin: 2rem 0;
+
+    &.formInvalid input {
+      border-bottom: 2px solid var(--color-error-300);
+    }
+  }
+
+  .actionContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .formBtn {
+    width: 100%;
+    padding: 1rem;
+    cursor: pointer;
+  }
+
+  .formLink {
+    font-weight: 400;
+    color: var(--color-primary-300);
+    cursor: pointer;
+
+    &:hover,
+    &:active {
+      color: var(--color-primary-200);
+    }
+  }
+}

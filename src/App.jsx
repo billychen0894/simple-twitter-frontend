@@ -1,14 +1,12 @@
-import { Route, Routes } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import ModalProvider from 'contexts/ModalContentContext';
-// import TweetModalRoute from 'users/pages/TweetModalRoute';
-// import EditProfileModalRoute from 'users/pages/EditProfileModalRoute';
-// import MainRoutes from 'shared/pages/MainRoutes';
+import TweetModalRoute from 'users/pages/TweetModalRoute';
+import EditProfileModalRoute from 'users/pages/EditProfileModalRoute';
+import MainRoutes from 'shared/pages/MainRoutes';
 import 'styles/global.scss';
-// import AdminUserCardItem from 'admin/AdminUserCard/AdminUserCardItem';
-// import AdminHeader from 'admin/AdminHeader/AdminHeader';
-import AdminUserList from 'admin/pages/AdminUserList';
-// import AdminTweetList from 'admin/AdminTweetList/AdminTweetList';
+import { AuthProvider } from 'contexts/AuthContext';
 
 function App() {
   // const location = useLocation();
@@ -16,15 +14,22 @@ function App() {
   // const action = location.state?.action;
 
   return (
-    <ModalProvider>
-      {/* {background && action === 'TWEET' && <TweetModalRoute />}
-      {background && action === 'EDIT' && <EditProfileModalRoute />} */}
-      <Routes>
-        <Route path="admin_main" element={<AdminUserList />} />
-        {/* <Route path="adminuser" element={<AdminUserCardList />} /> */}
-      </Routes>
-      {/* <MainRoutes location={background || location} /> */}
-    </ModalProvider>
+    <AuthProvider>
+      <ModalProvider>
+        {background && action === 'TWEET' && <TweetModalRoute />}
+        {background && action === 'EDIT' && <EditProfileModalRoute />}
+        <MainRoutes location={background || location} />
+        <ToastContainer
+          position="top-center"
+          autoClose={1000}
+          hideProgressBar
+          closeOnClick
+          pauseOnHover
+          draggable
+          theme="light"
+        />
+      </ModalProvider>
+    </AuthProvider>
   );
 }
 

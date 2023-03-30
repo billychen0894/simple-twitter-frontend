@@ -43,6 +43,8 @@ function Input({
   maxTextLength,
   textLength,
   inputStyles,
+  inputInlineStyle,
+  onInputChangeStyle,
 }) {
   const [inputState, dispatch] = useReducer(inputReducer, {
     val: initialValue || '',
@@ -58,6 +60,7 @@ function Input({
 
   const handleInputChange = (e) => {
     dispatch({ type: 'CHANGE', val: e.target.value, validators });
+    onInputChangeStyle(false);
   };
 
   const handleInputTouch = () => {
@@ -73,6 +76,7 @@ function Input({
         onChange={handleInputChange}
         onBlur={handleInputTouch}
         value={inputState.val}
+        style={inputInlineStyle}
       />
     ) : (
       <textarea

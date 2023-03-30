@@ -32,7 +32,7 @@ const formReducer = (state, action) => {
 
     case 'SET_DATA': {
       return {
-        inputs: action.formInputs,
+        inputs: action.inputs,
         formIsValid: action.formIsValid,
       };
     }
