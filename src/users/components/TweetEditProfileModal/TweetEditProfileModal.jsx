@@ -1,3 +1,7 @@
+import { useNavigate } from 'react-router-dom';
+
+import { useAuth } from 'contexts/AuthContext';
+import { useUsers } from 'contexts/UsersContext';
 import Avatar from 'shared/components/UIElements/Avatar';
 import Input from 'shared/components/UIElements/Input';
 import Button from 'shared/components/UIElements/Button';
@@ -12,10 +16,11 @@ import {
 import styles from 'users/components/TweetEditProfileModal/TweetEditProfileModal.module.scss';
 
 function TweetEditProfileModal({ profileHeaderImage, avatar }) {
-  // assume this is fecthed from db
-  const nameInitialValue = 'Jone Doe';
-  const introInitialValue =
-    'Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.';
+  const { currentUser } = useAuth();
+  const { updateUserProfile } = useUsers();
+  const nameInitialValue = currentUser?.name;
+  const introInitialValue = currentUser?.introduction;
+  const navigate = useNavigate();
 
   const initialFormInputs = {
     name: {
@@ -31,7 +36,14 @@ function TweetEditProfileModal({ profileHeaderImage, avatar }) {
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
-    console.log(formState.inputs);
+    updateUserProfile({
+      name: formState.inputs.name.val,
+      introduction: formState.inputs.intro.val,
+      avatar,
+      cover_image: profileHeaderImage,
+    });
+
+    navigate(-1);
   };
 
   return (
