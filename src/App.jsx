@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { Routes, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 import ModalProvider from 'contexts/ModalContentContext';
@@ -20,18 +20,20 @@ function App() {
       <UsersProvider>
         <TweetsProvider>
           <ModalProvider>
-            {background && action === 'TWEET' && <TweetModalRoute />}
-            {background && action === 'EDIT' && <EditProfileModalRoute />}
-            <MainRoutes location={background || location} />
-            <ToastContainer
-              position="top-center"
-              autoClose={1000}
-              hideProgressBar
-              closeOnClick
-              pauseOnHover
-              draggable
-              theme="light"
-            />
+            <Routes>
+              {background && action === 'TWEET' && <TweetModalRoute />}
+              {background && action === 'EDIT' && <EditProfileModalRoute />}
+              <MainRoutes location={background || location} />
+              <ToastContainer
+                position="top-center"
+                autoClose={1000}
+                hideProgressBar
+                closeOnClick
+                pauseOnHover
+                draggable
+                theme="light"
+              />
+            </Routes>
           </ModalProvider>
         </TweetsProvider>
       </UsersProvider>
