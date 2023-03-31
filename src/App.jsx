@@ -5,10 +5,10 @@ import ModalProvider from 'contexts/ModalContentContext';
 import TweetModalRoute from 'users/pages/TweetModalRoute';
 import EditProfileModalRoute from 'users/pages/EditProfileModalRoute';
 import MainRoutes from 'shared/pages/MainRoutes';
-import 'styles/global.scss';
 import { AuthProvider } from 'contexts/AuthContext';
 import { TweetsProvider } from 'contexts/TweetsContext';
 import { UsersProvider } from 'contexts/UsersContext';
+import 'styles/global.scss';
 
 function App() {
   const location = useLocation();
