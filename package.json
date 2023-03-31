@@ -27,9 +27,9 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "dotenv -e .env react-app-rewired build",
-    "test": "dotenv -e .env react-app-rewired test",
-    "eject": "dotenv -e .env react-app-rewired eject",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject",
     "lint": "eslint 'src/**/*.{js,jsx}' --quiet"
   },
   "browserslist": {

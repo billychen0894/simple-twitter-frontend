@@ -64,14 +64,6 @@ function TweetList({ listType, followType, currentAccountName, listItems }) {
     fetchUser,
   ]);
 
-  // const { tweetId } = useParams();
-  // const { fetchReplies, replies } = useTweets();
-  // useEffect(() => {
-  //   if (tweetId && listType === 'tweetReply') {
-  //     fetchReplies(tweetId);
-  //   }
-  // }, [fetchReplies, listType, tweetId]);
-
   if (listType === 'tweetReply' && Array.isArray(listItems)) {
     content = listItems.map((item) => {
       return (
