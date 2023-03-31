@@ -7,9 +7,10 @@ import { ReactComponent as SettingIcon } from 'assets/icons/settingIcon.svg';
 import { ReactComponent as ActiveSettingIcon } from 'assets/icons/ActiveSettingIcon.svg';
 
 import styles from 'shared/components/Navigation/NavLinks.module.scss';
+import { useAuth } from 'contexts/AuthContext';
 
 function NavLinks() {
-  const userId = 'u1';
+  const { currentUser } = useAuth();
   return (
     <ul className={styles.navLinks}>
       <li>
@@ -31,8 +32,9 @@ function NavLinks() {
       </li>
       <li>
         <NavLink
-          to={`${userId}`}
+          to={`${currentUser?.id}`}
           className={({ isActive }) => (isActive ? styles.active : undefined)}
+          end
         >
           {({ isActive }) => (
             <>

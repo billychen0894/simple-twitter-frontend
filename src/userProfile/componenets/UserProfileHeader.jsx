@@ -1,5 +1,5 @@
-import { useContext, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useContext, useEffect, useState, useRef } from 'react';
+import { Link, useLocation, useParams } from 'react-router-dom';
 
 import Avatar from 'shared/components/UIElements/Avatar';
 import Button from 'shared/components/UIElements/Button';
@@ -8,22 +8,59 @@ import { ReactComponent as NotifiBtnIcon } from 'assets/icons/notifiBtnIcon.svg'
 import { ModalContentContext } from 'contexts/ModalContentContext';
 import defaultProfileHeaderImage from 'assets/images/defaultProfileHeaderImage.png';
 import styles from 'userProfile/componenets/UserProfileHeader.module.scss';
+import { useAuth } from 'contexts/AuthContext';
+import { useUsers } from 'contexts/UsersContext';
 
-function UserProfileHeader({ userInfo, userId }) {
-  const {
-    profileHeaderImage,
-    avatar,
-    name,
-    username,
-    profileStatus,
-    following,
-    followers,
-  } = userInfo;
-  const tempUserIdstate = 'u1';
-
-  const [followBtnToggle, setFollowBtnToggle] = useState(false);
-
+function UserProfileHeader() {
   const location = useLocation();
+  const { userId } = useParams();
+  const { currentUser } = useAuth();
+  const {
+    fetchUser,
+    fetchUserFollowers,
+    fetchUserFollowings,
+    user,
+    deleteUserFollow,
+    updateUserFollow,
+    currUserFollowList,
+    userFollowings,
+    userFollowers,
+  } = useUsers();
+  const { id: currentUserId } = currentUser;
+
+  useEffect(() => {
+    fetchUserFollowers(userId);
+    fetchUserFollowings(userId);
+    fetchUser(userId);
+  }, [fetchUserFollowings, fetchUserFollowers, userId, fetchUser]);
+
+  // const [userFollowers, setUserFollowers] = useState([]);
+  // useEffect(() => {
+  //   async function loadUserFollowers() {
+  //     const result = await fetchUserFollowers(userId);
+
+  //     if (result) {
+  //       setUserFollowers(result.length);
+  //     } else {
+  //       setUserFollowers(0);
+  //     }
+  //   }
+  //   loadUserFollowers();
+  // }, [fetchUserFollowers, userId]);
+
+  // const [userFollowings, setUserFollowings] = useState([]);
+  // useEffect(() => {
+  //   async function loadUserFollowing() {
+  //     const result = await fetchUserFollowings(userId);
+
+  //     if (result) {
+  //       setUserFollowings(result.length);
+  //     } else {
+  //       setUserFollowings(0);
+  //     }
+  //   }
+  //   loadUserFollowing();
+  // }, [fetchUserFollowings, userId]);
 
   const modalContentCtx = useContext(ModalContentContext);
   const { handleModalClick } = modalContentCtx;
@@ -32,26 +69,48 @@ function UserProfileHeader({ userInfo, userId }) {
     handleModalClick('edit');
   };
 
-  const handleFollowBtnToggle = () => {
-    setFollowBtnToggle(!followBtnToggle);
+  const [isUserFollowing, setIsUserFollowing] = useState(null);
+  const prevIsUserFollowingRef = useRef(null);
+
+  useEffect(() => {
+    if (currUserFollowList) {
+      const isFollowing = currUserFollowList.some(
+        (id) => id.followingId === +userId
+      );
+      if (isFollowing !== prevIsUserFollowingRef.current) {
+        setIsUserFollowing(isFollowing);
+        prevIsUserFollowingRef.current = isFollowing;
+      }
+    }
+  }, [currUserFollowList, userId]);
+
+  const handleToggleFollowing = async (followUserId) => {
+    if (isUserFollowing) {
+      await deleteUserFollow(followUserId);
+      setIsUserFollowing(false); // update the state after deleting
+    } else {
+      await updateUserFollow({ id: followUserId });
+      setIsUserFollowing(true); // update the state after adding
+    }
   };
 
   let btnContent;
-  if (tempUserIdstate !== userId) {
+  if (userId && currentUserId !== +userId) {
     btnContent = (
       <>
         <MessageIcon />
         <NotifiBtnIcon />
         <Button
           className={styles.btn}
-          inverse={!followBtnToggle}
-          onClick={handleFollowBtnToggle}
+          inverse={!isUserFollowing}
+          onClick={() => handleToggleFollowing(userId)}
         >
-          {followBtnToggle ? '正在跟隨' : '跟隨'}
+          {isUserFollowing ? '正在跟隨' : '跟隨'}
         </Button>
       </>
     );
   }
+
   return (
     <div className={styles.userProfileHeader}>
       <div className={styles.headerImageContainer}>
@@ -60,7 +119,7 @@ function UserProfileHeader({ userInfo, userId }) {
           className={styles.headerImage}
           style={{
             backgroundImage: `url(${
-              profileHeaderImage || defaultProfileHeaderImage
+              user?.coverImage || defaultProfileHeaderImage
             })`,
           }}
         />
@@ -72,12 +131,12 @@ function UserProfileHeader({ userInfo, userId }) {
             <Avatar
               className={styles.avatar}
               overlayStyles={styles.overlay}
-              image={avatar}
+              image={user?.avatar}
               defaultAvatarStyle={styles.defaultAvatar}
             />
           </div>
           <div className={styles.btnWrapper}>
-            {tempUserIdstate !== userId ? (
+            {currentUserId !== +userId ? (
               btnContent
             ) : (
               <Button
@@ -94,22 +153,26 @@ function UserProfileHeader({ userInfo, userId }) {
         </div>
         <div className={styles.userInfoWrapper}>
           <div className={styles.usernames}>
-            <span className={styles.name}>{name}</span>
-            <span>@{username}</span>
+            <span className={styles.name}>{user?.name}</span>
+            <span>@{user?.account}</span>
           </div>
           <div>
-            <span className={styles.userStatus}>{profileStatus}</span>
+            <span className={styles.userStatus}>{user?.introduction}</span>
           </div>
           <div className={styles.userRatingContainer}>
             <Link to="following">
               <span className={styles.userFollowingCount}>
-                <span className={styles.count}>{following.length}&nbsp;個</span>
+                <span className={styles.count}>
+                  {userFollowings.length}&nbsp;個
+                </span>
                 跟隨中
               </span>
             </Link>
             <Link to="followers">
               <span className={styles.userFollowersCount}>
-                <span className={styles.count}>{followers.length}&nbsp;位</span>
+                <span className={styles.count}>
+                  {userFollowers.length}&nbsp;位
+                </span>
                 跟隨者
               </span>
             </Link>

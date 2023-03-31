@@ -19,6 +19,7 @@ function ModalOverlay({
   overrideDefaultBtn,
   dividerNone,
   onTouch,
+  onClick,
 }) {
   const dividerStyles = cx({
     mainContent: true,
@@ -49,6 +50,7 @@ function ModalOverlay({
           <Button
             disabled={inputValue === '' || inputValue.length >= 140}
             className={styles.btn}
+            onClick={onClick}
           >
             {btnLabel}
           </Button>
@@ -71,6 +73,7 @@ function Modal({
   overrideDefaultBtn,
   dividerNone,
   onTouch,
+  onClick,
 }) {
   return (
     <>
@@ -86,6 +89,7 @@ function Modal({
         overrideDefaultBtn={overrideDefaultBtn}
         dividerNone={dividerNone}
         onTouch={onTouch}
+        onClick={onClick}
       >
         {children}
       </ModalOverlay>

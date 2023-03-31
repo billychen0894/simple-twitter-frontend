@@ -5,6 +5,7 @@ import Avatar from 'shared/components/UIElements/Avatar';
 import Rating from 'shared/components/UIElements/Rating';
 import { ModalContentContext } from 'contexts/ModalContentContext';
 import styles from 'users/components/TweetReply/TweetReply.module.scss';
+import { useTweets } from 'contexts/TweetsContext';
 
 function TweetReply({
   image,
@@ -16,20 +17,36 @@ function TweetReply({
   commentCount,
   likeCount,
   userId,
+  isLiked,
+  tweetId,
+  onClickLike,
+  handleLikes,
 }) {
   const navigate = useNavigate();
   const location = useLocation();
   const modalContentCtx = useContext(ModalContentContext);
-  const { handleModalClick } = modalContentCtx;
+  const { handleModalClick, handleModalReplyTweetId } = modalContentCtx;
+  const { likeTweet, unlikeTweet } = useTweets();
 
   const handleModalType = (e) => {
     e.stopPropagation();
     handleModalClick('reply');
+    handleModalReplyTweetId(tweetId);
   };
 
-  const handleToggleLike = (e) => {
+  const handleToggleLike = async (e) => {
     e.stopPropagation();
-    // handle request to update whether user like or unlike certain tweets
+
+    if (isLiked) {
+      await unlikeTweet(tweetId);
+      onClickLike(false);
+      handleLikes((prevLikes) => prevLikes - 1);
+      return;
+    }
+
+    await likeTweet(tweetId);
+    onClickLike(true);
+    handleLikes((prevLikes) => prevLikes + 1);
   };
 
   const handleNavigateProfile = (e) => {
@@ -92,6 +109,7 @@ function TweetReply({
           </Link>
           <Rating
             like
+            toggleLike={isLiked}
             className={styles.likeIcon}
             style={{ width: '2.5rem', height: '2.5rem' }}
             onClick={handleToggleLike}

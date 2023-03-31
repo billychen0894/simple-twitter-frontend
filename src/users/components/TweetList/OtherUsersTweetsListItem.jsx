@@ -2,7 +2,8 @@ import Button from 'shared/components/UIElements/Button';
 import styles from 'users/components/TweetList/TweetListItem.module.scss';
 
 function OtherUsersTweetsListItem({
-  name,
+  followersName,
+  followingUserName,
   tweetContent,
   inverse,
   onNavigateProfile,
@@ -24,7 +25,7 @@ function OtherUsersTweetsListItem({
             onClick={onNavigateProfile}
             role="presentation"
           >
-            {name}
+            {followersName || followingUserName}
           </span>
         </div>
         <div className={styles.infoBtnContainer}>{button}</div>

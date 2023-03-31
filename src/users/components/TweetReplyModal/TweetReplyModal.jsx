@@ -4,8 +4,9 @@ import styles from 'users/components/TweetReplyModal/TweetReplyModal.module.scss
 
 function TweetReplyModal({
   name,
-  userName,
+  username,
   time,
+  avatar,
   userToReply,
   tweetContent,
   onInputChange,
@@ -16,13 +17,13 @@ function TweetReplyModal({
     <div className={styles.modalReplyContentContainer}>
       <div className={styles.tweetReplyContainer}>
         <div className={styles.avatarContainer}>
-          <Avatar className={styles.retweetAvatar} />
+          <Avatar className={styles.retweetAvatar} image={avatar} />
           <div className={styles.outline} />
         </div>
         <div className={styles.tweetReplyContent}>
           <div className={styles.info}>
             <span className={styles.name}>{name}</span>
-            <span className={styles.userName}>@{userName}</span>
+            <span className={styles.userName}>@{username}</span>
             <span>·</span>
             <time className={styles.time}>{time}</time>
           </div>
