@@ -7,6 +7,8 @@ import EditProfileModalRoute from 'users/pages/EditProfileModalRoute';
 import MainRoutes from 'shared/pages/MainRoutes';
 import 'styles/global.scss';
 import { AuthProvider } from 'contexts/AuthContext';
+import { TweetsProvider } from 'contexts/TweetsContext';
+import { UsersProvider } from 'contexts/UsersContext';
 
 function App() {
   const location = useLocation();
@@ -15,20 +17,24 @@ function App() {
 
   return (
     <AuthProvider>
-      <ModalProvider>
-        {background && action === 'TWEET' && <TweetModalRoute />}
-        {background && action === 'EDIT' && <EditProfileModalRoute />}
-        <MainRoutes location={background || location} />
-        <ToastContainer
-          position="top-center"
-          autoClose={1000}
-          hideProgressBar
-          closeOnClick
-          pauseOnHover
-          draggable
-          theme="light"
-        />
-      </ModalProvider>
+      <UsersProvider>
+        <TweetsProvider>
+          <ModalProvider>
+            {background && action === 'TWEET' && <TweetModalRoute />}
+            {background && action === 'EDIT' && <EditProfileModalRoute />}
+            <MainRoutes location={background || location} />
+            <ToastContainer
+              position="top-center"
+              autoClose={1000}
+              hideProgressBar
+              closeOnClick
+              pauseOnHover
+              draggable
+              theme="light"
+            />
+          </ModalProvider>
+        </TweetsProvider>
+      </UsersProvider>
     </AuthProvider>
   );
 }
