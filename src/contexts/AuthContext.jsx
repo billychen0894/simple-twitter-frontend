@@ -1,4 +1,5 @@
 import { adminLogin, signup, userLogin } from 'api/auth';
+import decode from 'jwt-decode';
 import {
   useContext,
   useState,
@@ -8,7 +9,6 @@ import {
   useCallback,
 } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import jwt from 'jwt-decode';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -69,7 +69,7 @@ export function AuthProvider({ children }) {
       }
 
       if (authToken) {
-        const tempPayload = jwt(authToken);
+        const tempPayload = decode(authToken);
 
         setIsAuthenticated(true);
         setPayload(tempPayload);
@@ -118,7 +118,7 @@ export function AuthProvider({ children }) {
 
       if (status === 'success') {
         const { token } = result;
-        const tempPayload = jwt(token);
+        const tempPayload = decode(token);
 
         // get the expiration time from the decoded payload
         const { exp, user } = tempPayload;
@@ -171,7 +171,7 @@ export function AuthProvider({ children }) {
 
       if (status === 'success') {
         const { token } = result;
-        const tempPayload = jwt(token);
+        const tempPayload = decode(token);
 
         // get the expiration time from the decoded payload
         const { exp, user } = tempPayload;
