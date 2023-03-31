@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useTweets } from 'contexts/TweetsContext';
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Avatar from 'shared/components/UIElements/Avatar';
@@ -7,9 +8,11 @@ import TweetEditor from 'users/components/TweetPost/TweetEditor';
 import styles from 'users/components/TweetPost/TweetPost.module.scss';
 
 function TweetPost({ placeholder, image, userId }) {
+  const { createTweet } = useTweets();
   const navigate = useNavigate();
   const [input, setInput] = useState('');
   const [isTouched, setIsTouched] = useState(false);
+  const inputRef = useRef(null);
 
   const handleInputChange = (e) => {
     setInput(e.target.textContent);
@@ -24,6 +27,13 @@ function TweetPost({ placeholder, image, userId }) {
     navigate(`/${userId}`);
   };
 
+  const handleSubmitTweet = () => {
+    if (input !== '' && input.length < 140) {
+      createTweet({ description: input });
+      setInput('');
+      inputRef.current.innerHTML = '';
+    }
+  };
   return (
     <>
       <div className={styles.tweetPost}>
@@ -34,6 +44,7 @@ function TweetPost({ placeholder, image, userId }) {
         />
         <div className={styles.tweetPostContainer}>
           <TweetEditor
+            ref={inputRef}
             placeholder={placeholder}
             onInputChange={handleInputChange}
             inputValue={input}
@@ -44,8 +55,10 @@ function TweetPost({ placeholder, image, userId }) {
               <span className={styles.errorText}>字數不可超過140字</span>
             )}
             <Button
+              type="button"
               disabled={input === '' || input.length >= 140}
               className={styles.tweetBtn}
+              onClick={handleSubmitTweet}
             >
               推文
             </Button>
