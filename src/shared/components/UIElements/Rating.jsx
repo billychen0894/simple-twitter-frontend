@@ -1,8 +1,17 @@
 import styles from 'shared/components/UIElements/Rating.module.scss';
 import { ReactComponent as CommentIcon } from 'assets/icons/commentIcon.svg';
 import { ReactComponent as LikeIcon } from 'assets/icons/likeIcon.svg';
+import { ReactComponent as ToggleLikeIcon } from 'assets/icons/toggleLikeIcon.svg';
 
-function Rating({ className, comment, like, ratingCount, onClick, style }) {
+function Rating({
+  className,
+  comment,
+  like,
+  ratingCount,
+  onClick,
+  style,
+  toggleLike,
+}) {
   let icon;
 
   if (comment) {
@@ -19,10 +28,12 @@ function Rating({ className, comment, like, ratingCount, onClick, style }) {
   if (like) {
     icon = (
       <div
-        className={`${styles.iconContainer} ${styles.likeIcon}`}
+        className={`${styles.iconContainer} ${styles.likeIcon} ${
+          toggleLike ? styles.likedIcon : undefined
+        }`}
         style={style}
       >
-        <LikeIcon />
+        {toggleLike ? <ToggleLikeIcon /> : <LikeIcon />}
       </div>
     );
   }
