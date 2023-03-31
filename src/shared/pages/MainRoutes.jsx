@@ -18,9 +18,9 @@ function MainRoutes({ location }) {
 
   return (
     <Routes location={location}>
-      <Route path="login" element={<Login />} />
-      <Route path="admin_login" element={<AdminLogin />} />
-      <Route path="register" element={<Register />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/admin_login" element={<AdminLogin />} />
+      <Route path="/register" element={<Register />} />
       <Route path="*" element={<Navigate to="login" />} />
       <Route element={<PrivateRoutes />}>
         <Route element={<RootLayout />}>
