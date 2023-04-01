@@ -1,3 +1,4 @@
+import decode from 'jwt-decode';
 import {
   createContext,
   useCallback,
@@ -6,7 +7,6 @@ import {
   useMemo,
   useState,
 } from 'react';
-import decode from 'jwt-decode';
 
 import sendRequest from 'api/utils';
 
