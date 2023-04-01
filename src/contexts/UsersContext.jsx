@@ -34,7 +34,6 @@ export function UsersProvider({ children }) {
   const [userFollowings, setUserFollowings] = useState([]);
   const [top10Users, setTop10Users] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const authToken = localStorage.getItem('authToken');
 
   const fetchUser = useCallback(async (userId) => {
     setIsLoading(true);
@@ -70,10 +69,7 @@ export function UsersProvider({ children }) {
     const followers = await getUserFollowers(userId);
 
     if (Array.isArray(followers) && followers.length > 0) {
-      const currFollowers = followers.map((follow) => {
-        return { followerId: follow.followerId, isFollowing: false };
-      });
-      setUserFollowers(currFollowers);
+      setUserFollowers(followers);
       setIsLoading(false);
       return followers;
     }
@@ -88,10 +84,7 @@ export function UsersProvider({ children }) {
       const followings = await getUserFollowings(userId);
 
       if (Array.isArray(followings) && followings.length > 0) {
-        const currFollowing = followings.map((follow) => {
-          return { followingId: follow.followingId, isFollowing: true };
-        });
-        setUserFollowings(currFollowing);
+        setUserFollowings(followings);
         setIsLoading(false);
         return followings;
       }
@@ -109,6 +102,7 @@ export function UsersProvider({ children }) {
   const [currUserFollowList, setCurrUserFollowList] = useState([]);
   useEffect(() => {
     async function loadCurrentUserFollowingList() {
+      const authToken = localStorage.getItem('authToken');
       const userData = authToken ? decode(authToken) : null;
       const result = await fetchUserFollowings(userData?.id);
 
@@ -116,13 +110,10 @@ export function UsersProvider({ children }) {
         return;
       }
 
-      const userFollowingList = result.map((item) => {
-        return { followingId: item.followingId, isFollowing: item.isFollowing };
-      });
-      setCurrUserFollowList(userFollowingList);
+      setCurrUserFollowList(result);
     }
     loadCurrentUserFollowingList();
-  }, [authToken, fetchUserFollowings]);
+  }, [fetchUserFollowings]);
 
   const updateUserProfile = useCallback(
     async (payload) => {
@@ -212,54 +203,60 @@ export function UsersProvider({ children }) {
     }
   }, []);
 
-  useEffect(() => {
-    fetchTop10Users();
-  }, [fetchTop10Users]);
-
   const updateUserFollow = useCallback(
-    async (payload) => {
+    async (payload, pathUserId) => {
       try {
         const result = await followUser(payload);
 
         if (result && result.isFollowedUser) {
-          const updatedCurrentUserFollowList = [
-            ...currUserFollowList,
-            {
-              followingId: +result.isFollowedUser.followingId,
-              isFollowing: true,
-            },
-          ];
-          setCurrUserFollowList(updatedCurrentUserFollowList);
-          setUserFollowings(updatedCurrentUserFollowList);
-        }
+          const authToken = localStorage.getItem('authToken');
+          const userData = authToken ? decode(authToken) : null;
+          const updatedCurrUserFollowList = await fetchUserFollowings(
+            userData?.id
+          );
 
-        return result;
+          setCurrUserFollowList(updatedCurrUserFollowList);
+
+          if (+pathUserId === payload.id) {
+            await fetchUserFollowings(payload.id);
+            await fetchUserFollowers(payload.id);
+          } else {
+            await fetchUserFollowers(userData?.id);
+          }
+        }
       } catch (error) {
-        return error;
+        console.error(error);
       }
     },
-    [currUserFollowList]
+    [fetchUserFollowings, fetchUserFollowers]
   );
 
   const deleteUserFollow = useCallback(
-    async (id) => {
+    async (id, pathUserId) => {
       try {
         const result = await unFollowUser(id);
 
         if (result && result.removedFollowingUser) {
-          const updatedCurrentUserFollowList = currUserFollowList.filter(
-            (item) => item.followingId !== result.removedFollowingUser.id
+          const authToken = localStorage.getItem('authToken');
+          const userData = authToken ? decode(authToken) : null;
+          const updatedCurrUserFollowList = await fetchUserFollowings(
+            userData?.id
           );
-          setCurrUserFollowList(updatedCurrentUserFollowList);
-          setUserFollowers(updatedCurrentUserFollowList);
-        }
 
-        return result;
+          setCurrUserFollowList(updatedCurrUserFollowList);
+
+          if (+pathUserId === id) {
+            await fetchUserFollowings(id);
+            await fetchUserFollowers(id);
+          } else {
+            await fetchUserFollowers(userData?.id);
+          }
+        }
       } catch (error) {
-        return error;
+        console.error(error);
       }
     },
-    [currUserFollowList]
+    [fetchUserFollowings, fetchUserFollowers]
   );
 
   const userContext = useMemo(() => {
@@ -283,6 +280,7 @@ export function UsersProvider({ children }) {
       currUserFollowList,
       updateUserFollow,
       deleteUserFollow,
+      fetchTop10Users,
     };
   }, [
     user,
@@ -304,6 +302,7 @@ export function UsersProvider({ children }) {
     currUserFollowList,
     updateUserFollow,
     deleteUserFollow,
+    fetchTop10Users,
   ]);
   return (
     <UsersContext.Provider value={userContext}>

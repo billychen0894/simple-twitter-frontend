@@ -52,7 +52,6 @@ export function AuthProvider({ children }) {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const tokenData = retrieveStoredToken();
-  const redirectPath = pathname === '/login' ? '/login' : 'admin_login';
   let initialToken;
 
   if (tokenData?.token) {
@@ -94,9 +93,9 @@ export function AuthProvider({ children }) {
     // to clear setTimeout timer if user logs out manually
     if (logoutTimer) {
       clearTimeout(logoutTimer);
-      navigate(redirectPath);
+      navigate('/login');
     }
-  }, [navigate, redirectPath]);
+  }, [navigate]);
 
   // automatically tracks remainingTime when there's user
   useEffect(() => {
@@ -129,7 +128,7 @@ export function AuthProvider({ children }) {
         if (user?.role === 'user') {
           setRole('user');
         }
-        toast.success('Login Successful!');
+        toast.success('登入成功');
 
         setPayload(tempPayload);
         setIsAuthenticated(true);
@@ -182,7 +181,7 @@ export function AuthProvider({ children }) {
         if (user?.role === 'admin') {
           setRole('admin');
         }
-        toast.success('Login Successful!');
+        toast.success('登入成功!');
 
         setPayload(tempPayload);
         setIsAuthenticated(true);
