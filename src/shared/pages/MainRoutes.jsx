@@ -24,7 +24,7 @@ function MainRoutes({ location }) {
       <Route path="*" element={<Navigate to="login" />} />
       <Route element={<PrivateRoutes />}>
         <Route element={<RootLayout />}>
-          <Route path="setting" element={<Setting />} />
+          <Route path="setting" element={<Setting userData={currentUser} />} />
           <Route path="home" element={<UserTweet />}>
             <Route path="compose/tweet" element={<TweetModal />} />
           </Route>
