@@ -1,10 +1,11 @@
-import { Outlet, useLocation, useMatch } from 'react-router-dom';
+import { Outlet, useLocation, useMatch, useParams } from 'react-router-dom';
 
 import ProfileNavBar from 'userProfile/componenets/ProfileNavbar';
 import TweetHeader from 'users/components/TweetHeader/TweetHeader';
 import UserProfileHeader from 'userProfile/componenets/UserProfileHeader';
 import styles from 'userProfile/pages/UserProfile.module.scss';
-import { usersList } from 'constants/constants';
+import { useEffect } from 'react';
+import { useUsers } from 'contexts/UsersContext';
 
 function UserProfile() {
   const matchTweet = useMatch('/:userId');
@@ -13,8 +14,13 @@ function UserProfile() {
   const matchFollowing = useMatch('/:userId/following');
   const matchFollowers = useMatch('/:userId/followers');
   const location = useLocation();
+  const { userId } = useParams();
 
-  const [userInfo] = usersList.filter((user) => user.userId === 'u1');
+  const { fetchUser, user } = useUsers();
+
+  useEffect(() => {
+    fetchUser(userId);
+  }, [userId, fetchUser]);
 
   const navItems = [
     {
@@ -26,7 +32,7 @@ function UserProfile() {
     {
       id: crypto.randomUUID(),
       path: 'reply',
-      label: '推文與回覆',
+      label: '回覆',
       match: matchReply,
     },
     {
@@ -60,15 +66,19 @@ function UserProfile() {
 
   return (
     <div className={styles.tweet}>
-      <TweetHeader userProfileHeader label="John Doe" info="25 推文" />
+      <TweetHeader
+        userProfileHeader
+        label={user?.name}
+        info={`${user?.Tweets.length} 推文`}
+      />
 
       {selectedNavItem && !selectedNavItem.path.startsWith('follow') ? (
-        <UserProfileHeader userInfo={userInfo} userId="u1" />
+        <UserProfileHeader />
       ) : undefined}
 
       <ProfileNavBar
         navItemDetails={navItems}
-        userId="u1"
+        userId={userId}
         className={styles.tweetNavBar}
       />
       <Outlet />

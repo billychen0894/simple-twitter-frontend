@@ -1,38 +1,83 @@
+import { useAuth } from 'contexts/AuthContext';
+import { useTweets } from 'contexts/TweetsContext';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { MoonLoader } from 'react-spinners';
+import { formatTimestamp } from 'shared/utils/formattingTime';
 import TweetHeader from 'users/components/TweetHeader/TweetHeader';
 import TweetList from 'users/components/TweetList/TweetList';
 import TweetReply from 'users/components/TweetReply/TweetReply';
-import { usersList, tweetsList, replyList } from 'constants/constants';
 import styles from 'users/pages/Home.module.scss';
 
 function UserTweetReply() {
-  const currTweetInfo = tweetsList.find((tweet) => tweet.tweetId === 't1');
-  const { content, commentCount, likeCount, createdAt } = currTweetInfo;
+  const { currentUser } = useAuth();
+  const { tweetId } = useParams();
+  const { fetchTweet, currentTweet, replies, fetchReplies, isLoading } =
+    useTweets();
+  const [isLiked, setIsLiked] = useState(null);
+  const [likes, setLikes] = useState(currentTweet?.Likes.length);
 
-  const userInfo = usersList.find(
-    (user) => user.userId === currTweetInfo.userId
-  );
-  const { image, name, username } = userInfo;
+  useEffect(() => {
+    if (tweetId) {
+      fetchTweet(tweetId);
+      fetchReplies(tweetId);
+    }
+  }, [fetchTweet, tweetId, fetchReplies]);
 
-  const tweetReplyList = replyList.filter((reply) => reply.tweetId === 't1');
+  useEffect(() => {
+    if (currentTweet) {
+      setLikes(currentTweet?.Likes.length);
+      setIsLiked(
+        currentTweet?.Likes.some((like) => like.User_id === currentUser?.id)
+      );
+    }
+  }, [currentTweet, currentUser?.id]);
+
+  let time;
+  let date;
+
+  if (currentTweet?.createdAt) {
+    time = formatTimestamp(currentTweet?.createdAt, 'time');
+    date = formatTimestamp(currentTweet?.createdAt, 'date');
+  }
 
   return (
     <div className={styles.tweet}>
-      <TweetHeader userPostsHeader label="首頁" info="25 推文" />
-      <TweetReply
-        image={image}
-        name={name}
-        username={username}
-        tweetContent={content}
-        time={createdAt}
-        date={createdAt}
-        commentCount={commentCount}
-        likeCount={likeCount}
-      />
-      <TweetList
-        listType="userReply"
-        listItems={tweetReplyList}
-        tweetUserName={userInfo.name}
-      />
+      <TweetHeader userPostsHeader label="推文" />
+      {!isLoading ? (
+        <>
+          <TweetReply
+            image={currentTweet?.User.avatar}
+            name={currentTweet?.User.name}
+            username={currentTweet?.User.account}
+            tweetContent={currentTweet?.description}
+            time={time}
+            date={date}
+            commentCount={replies.length}
+            likeCount={likes}
+            isLiked={isLiked}
+            tweetId={tweetId}
+            onClickLike={setIsLiked}
+            handleLikes={setLikes}
+          />
+          <TweetList
+            listType="tweetReply"
+            listItems={replies}
+            currentAccountName={currentTweet?.User.account}
+          />
+        </>
+      ) : (
+        <MoonLoader
+          color="#FF974A"
+          loading={isLoading}
+          speedMultiplier={1}
+          cssOverride={{
+            margin: '0 auto',
+            position: 'relative',
+            top: '25%',
+          }}
+        />
+      )}
     </div>
   );
 }

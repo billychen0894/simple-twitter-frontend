@@ -4,15 +4,21 @@ import styles from 'shared/components/Followers/FollowersListItem.module.scss';
 import classNames from 'classnames/bind';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-function FollowersListItem({ following, name, username }) {
+function FollowersListItem({
+  isFollowing,
+  name,
+  account,
+  userId,
+  onToggleFollow,
+  avatar,
+}) {
   const cx = classNames.bind(styles);
   const navigate = useNavigate();
   const location = useLocation();
-  const userId = 'u1';
 
   const buttonStyles = cx({
     followBtn: true,
-    following,
+    following: isFollowing,
   });
 
   const handleNavigateProfile = (e) => {
@@ -23,10 +29,19 @@ function FollowersListItem({ following, name, username }) {
     navigate(`/${userId}`);
   };
 
+  const handleToggleFollow = (e) => {
+    e.preventDefault();
+    onToggleFollow(userId);
+  };
+
   return (
     <li className={styles.followersListItem}>
       <div className={styles.followersContent}>
-        <Avatar className={styles.avatar} onClick={handleNavigateProfile} />
+        <Avatar
+          className={styles.avatar}
+          onClick={handleNavigateProfile}
+          image={avatar}
+        />
         <div className={styles.followersInfoContainer}>
           <div className={styles.followersInfo}>
             <span
@@ -35,14 +50,19 @@ function FollowersListItem({ following, name, username }) {
               onClick={handleNavigateProfile}
               role="presentation"
             >
-              Pizza
+              {name}
             </span>
-            <span className={styles.username} title={username}>
-              @pizzahut
+            <span className={styles.username} title={account}>
+              @{account}
             </span>
           </div>
-          <Button inverse={!following} className={buttonStyles}>
-            {following ? '正在跟隨' : '跟隨'}
+          <Button
+            type="button"
+            inverse={!isFollowing}
+            className={buttonStyles}
+            onClick={handleToggleFollow}
+          >
+            {isFollowing ? '正在跟隨' : '跟隨'}
           </Button>
         </div>
       </div>

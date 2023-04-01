@@ -33,8 +33,9 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // this condition should also add role === 'user'
-    if (isAuthenticated) {
+    // this condition should also check role if it's users
+    console.log(window.location.pathname);
+    if (isAuthenticated && window.location.pathname !== '/home') {
       navigate('/home');
     }
   }, [isAuthenticated, navigate]);

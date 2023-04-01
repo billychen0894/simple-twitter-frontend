@@ -9,17 +9,24 @@ export const ModalContentContext = createContext(defaultModalContentContext);
 
 function ModalProvider({ children }) {
   const [modalContent, setModalContent] = useState(null);
+  const [modalReplyTweetId, setModalReplyTweetId] = useState(null);
 
   const handleModalClick = (type) => {
     setModalContent(type);
   };
 
+  const handleModalReplyTweetId = (tweetId) => {
+    setModalReplyTweetId(tweetId);
+  };
+
   const modalContentContext = useMemo(
     () => ({
       modalType: modalContent,
+      modalReplyTweetId,
       handleModalClick,
+      handleModalReplyTweetId,
     }),
-    [modalContent]
+    [modalContent, modalReplyTweetId]
   );
 
   return (

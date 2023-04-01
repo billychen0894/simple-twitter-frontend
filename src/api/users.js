@@ -65,7 +65,7 @@ export const updateUser = async (id, payload) => {
 
 export const updateUserSettings = async (id, payload) => {
   try {
-    const data = await sendRequest(`/users/${id}/settings`, 'PUT', payload);
+    const data = await sendRequest(`/users/${id}/setting`, 'PUT', payload);
     return data;
   } catch (error) {
     return { error: error.message };

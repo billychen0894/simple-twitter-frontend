@@ -9,13 +9,18 @@ import TweetEditProfileModal from 'users/components/TweetEditProfileModal/TweetE
 import { ModalContentContext } from 'contexts/ModalContentContext';
 import styles from 'users/components/TweetModal/TweetModal.module.scss';
 import { usersList } from 'constants/constants';
+import { useTweets } from 'contexts/TweetsContext';
+import { formattingTime } from 'shared/utils/formattingTime';
+import { MoonLoader } from 'react-spinners';
 
 function TweetModal() {
-  const [input, setInput] = useState('');
-  const [isTouched, setIsTouched] = useState(false);
   const navigate = useNavigate();
   const modalCtx = useContext(ModalContentContext);
-  const { modalType } = modalCtx;
+  const [input, setInput] = useState('');
+  const [isTouched, setIsTouched] = useState(false);
+  const { createTweet, createReply, currentTweet, isCurrentTweetLoading } =
+    useTweets();
+  const { modalType, modalReplyTweetId } = modalCtx;
 
   const [userInfo] = usersList.filter((user) => user.userId === 'u1');
   const { profileHeaderImage } = userInfo;
@@ -32,11 +37,23 @@ function TweetModal() {
     navigate(-1);
   };
 
-  // getTweetById(): should have an API that retrieve data based on the tweetId
-  // const tweetId = 't1';
-  // const userId = 'u1';
+  const handleSubmitTweet = () => {
+    if (input !== '' && input.length < 140) {
+      createTweet({ description: input });
+    }
+    navigate(-1);
+  };
+
+  const handleSubmitTweetReply = () => {
+    if (input !== '' && input.length < 140) {
+      createReply(modalReplyTweetId, { comment: input });
+    }
+    navigate(-1);
+  };
 
   let content;
+  let action;
+
   if (modalType === 'compose') {
     content = (
       <>
@@ -51,21 +68,30 @@ function TweetModal() {
         </div>
       </>
     );
+    action = handleSubmitTweet;
   }
 
   if (modalType === 'reply') {
-    content = (
+    content = !isCurrentTweetLoading ? (
       <TweetReplyModal
-        name="Apple"
-        userName="apple"
-        time="3 小時"
-        userToReply="apple"
-        tweetContent="Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat."
+        name={currentTweet?.User.name}
+        username={currentTweet?.User.account}
+        avatar={currentTweet?.User.avatar}
+        time={formattingTime(currentTweet?.createdAt)}
+        userToReply={currentTweet?.User.name}
+        tweetContent={currentTweet?.description}
         onInputChange={handleInputChange}
         onInputTouch={handleInputTouch}
         inputValue={input}
       />
+    ) : (
+      <MoonLoader
+        color="#FF974A"
+        speedMultiplier={1}
+        className={styles.spinner}
+      />
     );
+    action = handleSubmitTweetReply;
   }
 
   if (modalType === 'edit') {
@@ -90,6 +116,7 @@ function TweetModal() {
       inputValue={input}
       onTouch={isTouched}
       handleCloseModal={handleCloseTweetModal}
+      onClick={action}
     >
       <div className={styles.modalMainContent}>{content}</div>
     </Modal>

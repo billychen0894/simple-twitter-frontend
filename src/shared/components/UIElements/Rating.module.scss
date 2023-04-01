@@ -7,6 +7,10 @@
   font-weight: 400;
   cursor: pointer;
 
+  .likedIcon path {
+    fill: var(--color-error-300);
+  }
+
   &:hover,
   &:active {
     & .commentIcon path {

@@ -1,10 +1,15 @@
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+
+import { useUsers } from 'contexts/UsersContext';
+import useForm from 'hooks/useForm';
 import Avatar from 'shared/components/UIElements/Avatar';
 import Input from 'shared/components/UIElements/Input';
 import Button from 'shared/components/UIElements/Button';
 import { ReactComponent as CameraIcon } from 'assets/icons/cameraIcon.svg';
 import { ReactComponent as CloseIcon } from 'assets/icons/closeIcon.svg';
 import defaultProfileHeaderImage from 'assets/images/defaultProfileHeaderImage.png';
-import useForm from 'hooks/useForm';
 import {
   VALIDATOR_MAXLENGTH,
   VALIDATOR_REQUIRE,
@@ -12,26 +17,52 @@ import {
 import styles from 'users/components/TweetEditProfileModal/TweetEditProfileModal.module.scss';
 
 function TweetEditProfileModal({ profileHeaderImage, avatar }) {
-  // assume this is fecthed from db
-  const nameInitialValue = 'Jone Doe';
-  const introInitialValue =
-    'Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.';
+  const { user } = useUsers();
+  const { updateUserProfile } = useUsers();
+  const [userProfileInputError, setUserProfileInputError] = useState(false);
+  const navigate = useNavigate();
+  const nameInitialValue = user?.name || '';
+  const introInitialValue = user?.introduction || '';
 
   const initialFormInputs = {
     name: {
-      val: '',
-      isValid: false,
+      val: user?.name || '',
+      isValid: user?.name || false,
     },
     intro: {
-      val: '',
-      isValid: false,
+      val: user?.introduction || '',
+      isValid: user?.introduction || false,
     },
   };
   const [formState, handleInput] = useForm(initialFormInputs, false);
 
-  const handleSubmitForm = (e) => {
+  const handleSubmitForm = async (e) => {
     e.preventDefault();
-    console.log(formState.inputs);
+
+    if (!formState.formIsValid) {
+      toast.error('請輸入正確資料');
+      return;
+    }
+
+    const response = await updateUserProfile({
+      name: formState.inputs.name.val,
+      introduction: formState.inputs.intro.val,
+      avatar,
+      cover_image: profileHeaderImage,
+    });
+
+    const { success } = response;
+
+    if (!success) {
+      setUserProfileInputError(true);
+      toast.error('編輯失敗');
+      return;
+    }
+
+    if (success) {
+      navigate(-1);
+      toast.success('編輯成功');
+    }
   };
 
   return (
@@ -83,10 +114,14 @@ function TweetEditProfileModal({ profileHeaderImage, avatar }) {
             validators={[VALIDATOR_REQUIRE(), VALIDATOR_MAXLENGTH(50)]}
             errorText={
               formState.inputs.name.val.length > 50
-                ? '名稱不能超過50個字數'
+                ? '字數超出上限'
                 : '名稱不能留空白，必須填寫名稱'
             }
             textLength
+            inputStyles={`${styles.input} ${
+              userProfileInputError ? styles.formInvalid : undefined
+            }`}
+            onInputChangeStyle={setUserProfileInputError}
           />
           <Input
             id="intro"
@@ -99,8 +134,12 @@ function TweetEditProfileModal({ profileHeaderImage, avatar }) {
             rows="8"
             onInput={handleInput}
             validators={[VALIDATOR_MAXLENGTH(160)]}
-            errorText="自我介紹不能超過160個字數"
+            errorText="字數超出上限"
             textLength
+            inputStyles={`${styles.input} ${
+              userProfileInputError ? styles.formInvalid : undefined
+            }`}
+            onInputChangeStyle={setUserProfileInputError}
           />
           <div className={styles.formBtnContainer}>
             <Button type="submit" className={styles.formBtn}>
