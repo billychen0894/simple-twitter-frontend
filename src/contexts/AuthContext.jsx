@@ -173,12 +173,11 @@ export function AuthProvider({ children }) {
         const tempPayload = decode(token);
 
         // get the expiration time from the decoded payload
-        const { exp, user } = tempPayload;
 
         // convert the expiration time to Unix timestamp
-        const expTimestamp = new Date(exp * 1000).getTime();
+        const expTimestamp = new Date(tempPayload.exp * 1000).getTime();
 
-        if (user?.role === 'admin') {
+        if (tempPayload?.role === 'admin') {
           setRole('admin');
         }
         toast.success('登入成功!');
