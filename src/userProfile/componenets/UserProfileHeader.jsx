@@ -34,34 +34,6 @@ function UserProfileHeader() {
     fetchUser(userId);
   }, [fetchUserFollowings, fetchUserFollowers, userId, fetchUser]);
 
-  // const [userFollowers, setUserFollowers] = useState([]);
-  // useEffect(() => {
-  //   async function loadUserFollowers() {
-  //     const result = await fetchUserFollowers(userId);
-
-  //     if (result) {
-  //       setUserFollowers(result.length);
-  //     } else {
-  //       setUserFollowers(0);
-  //     }
-  //   }
-  //   loadUserFollowers();
-  // }, [fetchUserFollowers, userId]);
-
-  // const [userFollowings, setUserFollowings] = useState([]);
-  // useEffect(() => {
-  //   async function loadUserFollowing() {
-  //     const result = await fetchUserFollowings(userId);
-
-  //     if (result) {
-  //       setUserFollowings(result.length);
-  //     } else {
-  //       setUserFollowings(0);
-  //     }
-  //   }
-  //   loadUserFollowing();
-  // }, [fetchUserFollowings, userId]);
-
   const modalContentCtx = useContext(ModalContentContext);
   const { handleModalClick } = modalContentCtx;
 
@@ -84,12 +56,12 @@ function UserProfileHeader() {
     }
   }, [currUserFollowList, userId]);
 
-  const handleToggleFollowing = async (followUserId) => {
+  const handleToggleFollowing = async (followUserId, pathId) => {
     if (isUserFollowing) {
-      await deleteUserFollow(followUserId);
+      await deleteUserFollow(followUserId, pathId);
       setIsUserFollowing(false); // update the state after deleting
     } else {
-      await updateUserFollow({ id: followUserId });
+      await updateUserFollow({ id: followUserId }, pathId);
       setIsUserFollowing(true); // update the state after adding
     }
   };
@@ -103,7 +75,7 @@ function UserProfileHeader() {
         <Button
           className={styles.btn}
           inverse={!isUserFollowing}
-          onClick={() => handleToggleFollowing(userId)}
+          onClick={() => handleToggleFollowing(userId, userId)}
         >
           {isUserFollowing ? '正在跟隨' : '跟隨'}
         </Button>

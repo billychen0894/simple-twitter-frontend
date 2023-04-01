@@ -27,32 +27,35 @@ function TweetList({ listType, followType, currentAccountName, listItems }) {
   } = useUsers();
 
   useEffect(() => {
-    if (userId) {
-      if (listType === 'following') {
-        fetchUserFollowings(userId);
-        return;
-      }
+    async function fetchBasedOnType() {
+      if (userId) {
+        if (listType === 'following') {
+          await fetchUserFollowings(userId);
+          return;
+        }
 
-      if (listType === 'followers') {
-        fetchUserFollowers(userId);
-        return;
-      }
+        if (listType === 'followers') {
+          await fetchUserFollowers(userId);
+          return;
+        }
 
-      if (listType === 'reply') {
-        fetchUserRepliedTweets(userId);
-        fetchUser(userId);
-        return;
-      }
+        if (listType === 'reply') {
+          await fetchUserRepliedTweets(userId);
+          await fetchUser(userId);
+          return;
+        }
 
-      if (listType === 'like') {
-        fetchUserLikes(userId);
-        return;
-      }
+        if (listType === 'like') {
+          await fetchUserLikes(userId);
+          return;
+        }
 
-      if (listType === 'userTweets') {
-        fetchUserTweets(userId);
+        if (listType === 'userTweets') {
+          await fetchUserTweets(userId);
+        }
       }
     }
+    fetchBasedOnType();
   }, [
     listType,
     userId,
@@ -107,13 +110,14 @@ function TweetList({ listType, followType, currentAccountName, listItems }) {
     content = userFollowers.map((item) => {
       return (
         <TweetListItem
-          key={item.id}
+          key={item.followerId}
           listType={listType}
           content={item?.followerUser.introduction}
           time={formattingTime(item.createdAt)}
           followersName={item?.followerUser.name}
           isFollowing={item?.isFollowing}
           userId={item?.followerId}
+          userAvatar={item?.followerUser.avatar}
         />
       );
     });
@@ -127,9 +131,10 @@ function TweetList({ listType, followType, currentAccountName, listItems }) {
     content = userFollowings.map((item) => {
       return (
         <TweetListItem
-          key={item.id}
+          key={item.followingId}
           listType={listType}
           content={item?.followingUser.introduction}
+          userAvatar={item?.followingUser.avatar}
           followingUserName={item?.followingUser.name}
           isFollowing={item?.isFollowing}
           userId={item?.followingId}

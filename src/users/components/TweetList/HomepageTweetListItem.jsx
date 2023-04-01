@@ -80,10 +80,12 @@ function HomepageTweetListItem({
 
     if (isLiked) {
       await unlikeTweet(tweetId);
+      setUserTweetLikes((prevTweetLikes) => prevTweetLikes - 1);
       onClickLike(false);
       return;
     }
     await likeTweet(tweetId);
+    setUserTweetLikes((prevTweetLikes) => prevTweetLikes + 1);
     onClickLike(true);
   };
 

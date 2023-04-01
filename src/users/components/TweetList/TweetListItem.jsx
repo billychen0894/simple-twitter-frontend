@@ -23,7 +23,6 @@ function TweetListItem({
   userAccountName,
   currentAccountName,
   currentUserName,
-  isFollowing,
   tweetRepliedUserAccount,
   tweetRepliedUserAvatar,
   followersName,
@@ -33,6 +32,7 @@ function TweetListItem({
 }) {
   const location = useLocation();
   const navigate = useNavigate();
+  // const [isUserFollowing, setIsUserFollowing] = useState(isFollowing);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -95,13 +95,22 @@ function TweetListItem({
           />
         ) : undefined}
 
-        {listType === 'followers' || listType === 'following' ? (
+        {listType === 'followers' ? (
           <OtherUsersTweetsListItem
             tweetContent={content}
-            inverse={!isFollowing}
             onNavigateProfile={handleNavigateProfile}
             followersName={followersName}
             followingUserName={followingUserName}
+            followId={userId}
+          />
+        ) : undefined}
+
+        {listType === 'following' ? (
+          <OtherUsersTweetsListItem
+            tweetContent={content}
+            onNavigateProfile={handleNavigateProfile}
+            followingUserName={followingUserName}
+            followId={userId}
           />
         ) : undefined}
 
