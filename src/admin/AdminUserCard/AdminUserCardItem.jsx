@@ -12,6 +12,7 @@ function AdminUserCardItem({
   likeCount,
   followerCount,
   followingCount,
+  avatar,
 }) {
   return (
     <div className={styles.container}>
@@ -23,7 +24,7 @@ function AdminUserCardItem({
             <Avatar
               className={styles.avatar}
               overlayStyles={styles.overlay}
-              // image={avatar}
+              image={avatar}
               defaultAvatarStyle={styles.defaultAvatar}
             />
           </div>

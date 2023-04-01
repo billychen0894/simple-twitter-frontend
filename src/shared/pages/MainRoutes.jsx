@@ -12,6 +12,8 @@ import Login from 'shared/pages/Login';
 import Register from 'shared/pages/Register';
 import AdminLogin from 'shared/pages/AdminLogin';
 import PrivateRoutes from 'shared/utils/PrivateRoutes';
+import AdminMain from 'admin/pages/AdminMain';
+import AdminUserList from 'admin/pages/AdminUserList';
 
 function MainRoutes({ location }) {
   const userInfo = usersList.find((user) => user.userId === 'u1');
@@ -37,6 +39,8 @@ function MainRoutes({ location }) {
       <Route path="admin_login" element={<AdminLogin />} />
       <Route path="register" element={<Register />} />
       <Route path="*" element={<Navigate to="login" />} />
+      <Route path="admin" element={<AdminMain />} />
+      <Route path="admin_user" element={<AdminUserList />} />
       <Route element={<PrivateRoutes />}>
         <Route element={<RootLayout />}>
           <Route path="setting" element={<Setting />} />
