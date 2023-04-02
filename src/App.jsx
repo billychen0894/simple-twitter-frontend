@@ -2,13 +2,13 @@ import { useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 import { AuthProvider } from 'contexts/AuthContext';
-import ModalProvider from 'contexts/ModalContentContext';
-import { TweetsProvider } from 'contexts/TweetContext';
+import { TweetsProvider } from 'contexts/TweetsContext';
 import { UsersProvider } from 'contexts/UsersContext';
+import ModalProvider from 'contexts/ModalContentContext';
 import MainRoutes from 'shared/pages/MainRoutes';
-import 'styles/global.scss';
 import EditProfileModalRoute from 'users/pages/EditProfileModalRoute';
 import TweetModalRoute from 'users/pages/TweetModalRoute';
+import 'styles/global.scss';
 
 function App() {
   const location = useLocation();

@@ -2,7 +2,7 @@ import AdminNavigation from 'shared/components/Navigation/AdminNavigation';
 import AdminHeader from 'admin/AdminHeader/AdminHeader';
 import AdminTweetList from 'admin/AdminTweetList/AdminTweetList';
 import styles from 'admin/pages/AdminMain.module.scss';
-import { useTweets } from 'contexts/TweetContext';
+import { useTweets } from 'contexts/TweetsContext';
 import { useEffect } from 'react';
 
 function AdminMain() {

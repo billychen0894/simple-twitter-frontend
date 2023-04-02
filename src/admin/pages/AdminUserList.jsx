@@ -6,7 +6,7 @@ import styles from 'admin/pages/AdminMain.module.scss';
 // import { useEffect, useState } from 'react';
 // import { useAuth } from 'contexts/AuthContext';
 import { useEffect } from 'react';
-import { useUsers } from 'contexts/UserContext';
+import { useUsers } from 'contexts/UsersContext';
 
 function AdminUserList(cardItems) {
   const { fetchAdminUsers, adminUsers } = useUsers();

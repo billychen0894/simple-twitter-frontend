@@ -8,12 +8,12 @@ import Login from 'shared/pages/Login';
 import Register from 'shared/pages/Register';
 import RootLayout from 'shared/pages/RootLayout';
 import Setting from 'shared/pages/Setting';
-import PrivateRoutes from 'shared/utils/PrivateRoutes';
 import UserProfile from 'userProfile/pages/UserProfile';
 import TweetList from 'users/components/TweetList/TweetList';
 import TweetModal from 'users/components/TweetModal/TweetModal';
 import UserTweet from 'users/pages/UserTweet';
 import UserTweetReply from 'users/pages/UserTweetReply';
+import PrivateRoutes from 'shared/utils/PrivateRoutes';
 
 function MainRoutes({ location }) {
   const { currentUser } = useAuth();
@@ -24,9 +24,13 @@ function MainRoutes({ location }) {
       <Route path="admin_login" element={<AdminLogin />} />
       <Route path="register" element={<Register />} />
       <Route path="*" element={<Navigate to="login" />} />
-      <Route path="admin" element={<AdminMain />} />
-      <Route path="admin_user" element={<AdminUserList />} />
-      <Route element={<PrivateRoutes />}>
+
+      <Route element={<PrivateRoutes allowedRoles={['admin']} />}>
+        <Route path="admin" element={<AdminMain />} />
+        <Route path="admin_user" element={<AdminUserList />} />
+      </Route>
+
+      <Route element={<PrivateRoutes allowedRoles={['user']} />}>
         <Route element={<RootLayout />}>
           <Route path="setting" element={<Setting userData={currentUser} />} />
           <Route path="home" element={<UserTweet />}>
