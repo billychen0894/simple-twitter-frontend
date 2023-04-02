@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import TweetEditor from 'users/components/TweetPost/TweetEditor';
 import Avatar from 'shared/components/UIElements/Avatar';
@@ -12,6 +12,7 @@ import { useTweets } from 'contexts/TweetsContext';
 import { formattingTime } from 'shared/utils/formattingTime';
 import { MoonLoader } from 'react-spinners';
 import { useAuth } from 'contexts/AuthContext';
+import { useUsers } from 'contexts/UsersContext';
 
 function TweetModal() {
   const navigate = useNavigate();
@@ -21,7 +22,9 @@ function TweetModal() {
   const { createTweet, createReply, currentTweet, isCurrentTweetLoading } =
     useTweets();
   const { modalType, modalReplyTweetId } = modalCtx;
+  const { fetchUserTweets } = useUsers();
   const { currentUser } = useAuth();
+  const location = useLocation();
 
   const handleInputChange = (e) => {
     setInput(e.target.textContent);
@@ -35,9 +38,13 @@ function TweetModal() {
     navigate(-1);
   };
 
-  const handleSubmitTweet = () => {
+  const handleSubmitTweet = async () => {
     if (input !== '' && input.length < 140) {
-      createTweet({ description: input });
+      await createTweet({ description: input });
+    }
+
+    if (location?.state?.background.pathname === `/${currentUser?.id}`) {
+      await fetchUserTweets(currentUser?.id);
     }
     navigate(-1);
   };

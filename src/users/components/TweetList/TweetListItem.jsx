@@ -39,7 +39,10 @@ function TweetListItem({
 
   const { fetchReplies } = useTweets();
   const handleTweetReply = () => {
-    if (location && location.pathname === '/home') {
+    if (
+      (location && location.pathname === '/home') ||
+      location.pathname === `/${userId}`
+    ) {
       navigate(`/${userId}/reply/${tweetId}`);
       fetchReplies(tweetId);
     }
