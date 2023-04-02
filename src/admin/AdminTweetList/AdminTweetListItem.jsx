@@ -22,7 +22,9 @@ function AdminTweetListItem({
           <time className={styles.time}>{time}</time>
         </div>
         <div className={styles.contentContainer}>
-          <span className={styles.content}>{content}</span>
+          <span className={styles.content} title={content}>
+            {content.length > 50 ? `${content.slice(0, 50)}...` : content}
+          </span>
         </div>
         <div
           className={styles.closeIcon}

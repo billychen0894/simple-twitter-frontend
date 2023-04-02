@@ -43,10 +43,15 @@ function TweetModal() {
       await createTweet({ description: input });
     }
 
+    if (location?.state?.background.pathname === '/setting') {
+      navigate('/home');
+    } else {
+      navigate(-1);
+    }
+
     if (location?.state?.background.pathname === `/${currentUser?.id}`) {
       await fetchUserTweets(currentUser?.id);
     }
-    navigate(-1);
   };
 
   const handleSubmitTweetReply = () => {
