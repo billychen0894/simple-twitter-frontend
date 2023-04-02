@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import AdminMain from 'admin/pages/AdminMain';
 import AdminUserList from 'admin/pages/AdminUserList';
@@ -14,39 +14,34 @@ import TweetModal from 'users/components/TweetModal/TweetModal';
 import UserTweet from 'users/pages/UserTweet';
 import UserTweetReply from 'users/pages/UserTweetReply';
 import PrivateRoutes from 'shared/utils/PrivateRoutes';
-import { useEffect } from 'react';
 import AdminRootLayout from 'admin/pages/AdminRoute';
 
 function MainRoutes({ location }) {
-  const { currentUser, isAuthenticated, role } = useAuth();
-  const navigate = useNavigate();
+  const { currentUser } = useAuth();
 
-  useEffect(() => {
-    const authToken = localStorage.getItem('authToken');
-    if (authToken && role === 'user') {
-      navigate('/home');
-    }
-
-    if (authToken && role === 'admin') {
-      navigate('/admin');
-    }
-  }, [isAuthenticated, navigate, role]);
+  // useEffect(() => {
+  //   const authToken = localStorage.getItem('authToken');
+  //   if (authToken) {
+  //     navigate(redirectHomePath);
+  //   }
+  // }, [navigate, redirectHomePath]);
 
   return (
     <Routes location={location}>
       <Route path="login" element={<Login />} />
       <Route path="admin_login" element={<AdminLogin />} />
       <Route path="register" element={<Register />} />
+      <Route path="/unauthorized" element={<div>unauthorized</div>} />
       <Route path="*" element={<Navigate to="login" />} />
 
-      <Route element={<PrivateRoutes allowedRoles={['admin']} />}>
+      <Route element={<PrivateRoutes allowedRoles="admin" />}>
         <Route element={<AdminRootLayout />}>
           <Route path="admin" element={<AdminMain />} />
           <Route path="admin_users" element={<AdminUserList />} />
         </Route>
       </Route>
 
-      <Route element={<PrivateRoutes allowedRoles={['user']} />}>
+      <Route element={<PrivateRoutes allowedRoles="user" />}>
         <Route element={<RootLayout />}>
           <Route path="setting" element={<Setting userData={currentUser} />} />
           <Route path="home" element={<UserTweet />}>

@@ -5,6 +5,7 @@ import { AuthProvider } from 'contexts/AuthContext';
 import { TweetsProvider } from 'contexts/TweetsContext';
 import { UsersProvider } from 'contexts/UsersContext';
 import ModalProvider from 'contexts/ModalContentContext';
+import { AdminProvider } from 'contexts/AdminContext';
 import MainRoutes from 'shared/pages/MainRoutes';
 import EditProfileModalRoute from 'users/pages/EditProfileModalRoute';
 import TweetModalRoute from 'users/pages/TweetModalRoute';
@@ -18,22 +19,24 @@ function App() {
   return (
     <AuthProvider>
       <UsersProvider>
-        <TweetsProvider>
-          <ModalProvider>
-            {background && action === 'TWEET' && <TweetModalRoute />}
-            {background && action === 'EDIT' && <EditProfileModalRoute />}
-            <MainRoutes location={background || location} />
-            <ToastContainer
-              position="top-center"
-              autoClose={1000}
-              hideProgressBar
-              closeOnClick
-              pauseOnHover
-              draggable
-              theme="light"
-            />
-          </ModalProvider>
-        </TweetsProvider>
+        <AdminProvider>
+          <TweetsProvider>
+            <ModalProvider>
+              {background && action === 'TWEET' && <TweetModalRoute />}
+              {background && action === 'EDIT' && <EditProfileModalRoute />}
+              <MainRoutes location={background || location} />
+              <ToastContainer
+                position="top-center"
+                autoClose={1000}
+                hideProgressBar
+                closeOnClick
+                pauseOnHover
+                draggable
+                theme="light"
+              />
+            </ModalProvider>
+          </TweetsProvider>
+        </AdminProvider>
       </UsersProvider>
     </AuthProvider>
   );
