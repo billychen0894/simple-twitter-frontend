@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { MoonLoader } from 'react-spinners';
-
 import AdminHeader from 'admin/AdminHeader/AdminHeader';
 import AdminTweetList from 'admin/AdminTweetList/AdminTweetList';
 import { useTweets } from 'contexts/TweetsContext';
@@ -11,7 +10,6 @@ import styles from 'admin/pages/AdminMain.module.scss';
 function AdminMain() {
   const { tweets, fetchTweets, isLoading, setTweets } = useTweets();
   const { deleteUserTweet } = useAdmin();
-
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
 
