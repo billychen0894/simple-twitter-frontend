@@ -8,10 +8,10 @@ import TweetReplyModal from 'users/components/TweetReplyModal/TweetReplyModal';
 import TweetEditProfileModal from 'users/components/TweetEditProfileModal/TweetEditProfileModal';
 import { ModalContentContext } from 'contexts/ModalContentContext';
 import styles from 'users/components/TweetModal/TweetModal.module.scss';
-import { usersList } from 'constants/constants';
 import { useTweets } from 'contexts/TweetsContext';
 import { formattingTime } from 'shared/utils/formattingTime';
 import { MoonLoader } from 'react-spinners';
+import { useAuth } from 'contexts/AuthContext';
 
 function TweetModal() {
   const navigate = useNavigate();
@@ -21,9 +21,7 @@ function TweetModal() {
   const { createTweet, createReply, currentTweet, isCurrentTweetLoading } =
     useTweets();
   const { modalType, modalReplyTweetId } = modalCtx;
-
-  const [userInfo] = usersList.filter((user) => user.userId === 'u1');
-  const { profileHeaderImage } = userInfo;
+  const { currentUser } = useAuth();
 
   const handleInputChange = (e) => {
     setInput(e.target.textContent);
@@ -57,7 +55,7 @@ function TweetModal() {
   if (modalType === 'compose') {
     content = (
       <>
-        <Avatar className={styles.avatar} />
+        <Avatar className={styles.avatar} image={currentUser?.avatar} />
         <div className={styles.tweetPostContainer}>
           <TweetEditor
             placeholder="有什麼新鮮事?"
@@ -104,7 +102,10 @@ function TweetModal() {
         dividerNone
       >
         <div className={`${styles.modalMainContent} ${styles.editModal}`}>
-          <TweetEditProfileModal profileHeaderImage={profileHeaderImage} />
+          <TweetEditProfileModal
+            profileHeaderImage={currentUser?.coverImage}
+            avatar={currentUser?.avatar}
+          />
         </div>
       </Modal>
     );

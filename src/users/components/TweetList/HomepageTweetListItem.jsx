@@ -100,7 +100,7 @@ function HomepageTweetListItem({
           {!isTweetLoading ? name : undefined}
         </span>
         <span className={styles.username}>
-          {!isTweetLoading ? userAccountName : undefined}
+          @{!isTweetLoading ? userAccountName : undefined}
         </span>
         <span>·</span>
         <time className={styles.time}>
