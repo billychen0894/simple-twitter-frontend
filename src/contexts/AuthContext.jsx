@@ -65,6 +65,7 @@ export function AuthProvider({ children }) {
       if (!authToken) {
         setIsAuthenticated(false);
         setPayload(null);
+        setRole(null);
       }
 
       if (authToken) {
@@ -72,9 +73,11 @@ export function AuthProvider({ children }) {
 
         setIsAuthenticated(true);
         setPayload(tempPayload);
+        setRole(tempPayload?.role);
       } else {
         setIsAuthenticated(false);
         setPayload(null);
+        setRole(null);
       }
     };
 

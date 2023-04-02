@@ -2,9 +2,10 @@ import { Outlet, Navigate } from 'react-router-dom';
 import { useAuth } from 'contexts/AuthContext';
 
 function PrivateRoutes({ allowedRoles }) {
-  const { isAuthenticated, currentUser } = useAuth();
+  const { isAuthenticated, role } = useAuth();
 
-  if (allowedRoles.includes(currentUser?.role)) {
+  if (allowedRoles.includes(role)) {
+    console.log('alllowedRoles', role);
     return <Outlet />;
   }
 

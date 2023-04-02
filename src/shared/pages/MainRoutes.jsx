@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 
 import AdminMain from 'admin/pages/AdminMain';
 import AdminUserList from 'admin/pages/AdminUserList';
@@ -14,9 +14,22 @@ import TweetModal from 'users/components/TweetModal/TweetModal';
 import UserTweet from 'users/pages/UserTweet';
 import UserTweetReply from 'users/pages/UserTweetReply';
 import PrivateRoutes from 'shared/utils/PrivateRoutes';
+import { useEffect } from 'react';
 
 function MainRoutes({ location }) {
-  const { currentUser } = useAuth();
+  const { currentUser, isAuthenticated, role } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const authToken = localStorage.getItem('authToken');
+    if (authToken && role === 'user') {
+      navigate('/home');
+    }
+
+    if (authToken && role === 'admin') {
+      navigate('/admin');
+    }
+  }, [isAuthenticated, navigate, role]);
 
   return (
     <Routes location={location}>
@@ -27,7 +40,7 @@ function MainRoutes({ location }) {
 
       <Route element={<PrivateRoutes allowedRoles={['admin']} />}>
         <Route path="admin" element={<AdminMain />} />
-        <Route path="admin_user" element={<AdminUserList />} />
+        <Route path="admin_users" element={<AdminUserList />} />
       </Route>
 
       <Route element={<PrivateRoutes allowedRoles={['user']} />}>

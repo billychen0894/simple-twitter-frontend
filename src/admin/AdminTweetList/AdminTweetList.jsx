@@ -2,7 +2,6 @@ import styles from 'admin/AdminTweetList/AdminTweetList.module.scss';
 import AdminTweetListItem from 'admin/AdminTweetList/AdminTweetListItem';
 
 function AdminTweetList({ listItems }) {
-  console.log('list:', listItems);
   const AdminContent = listItems.map((item) => {
     return (
       <AdminTweetListItem

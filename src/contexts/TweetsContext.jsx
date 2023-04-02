@@ -42,6 +42,7 @@ export function TweetsProvider({ children }) {
       } else {
         const response = await sendRequest('/tweets');
 
+        console.log(response);
         setTweets(response);
         setHasNewTweet(false);
         sessionStorage.setItem('tweets', JSON.stringify(response));

@@ -4,18 +4,20 @@ import AdminTweetList from 'admin/AdminTweetList/AdminTweetList';
 import styles from 'admin/pages/AdminMain.module.scss';
 import { useTweets } from 'contexts/TweetsContext';
 import { useEffect } from 'react';
+import { MoonLoader } from 'react-spinners';
 
 function AdminMain() {
-  const { tweets, fetchTweets } = useTweets();
+  const { tweets, fetchTweets, isLoading } = useTweets();
 
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
-    console.log('token', authToken);
 
     if (authToken && tweets.length === 0) {
+      console.log('tweets', tweets);
+      console.log('authToken');
       fetchTweets();
     }
-  }, [fetchTweets, tweets.length]);
+  }, [fetchTweets, tweets.length, tweets]);
 
   return (
     <div className="adminContainer">
@@ -23,7 +25,19 @@ function AdminMain() {
         <AdminNavigation className={styles.navigation} />
         <div className={styles.main}>
           <AdminHeader adminMain label="推文清單" className={styles.header} />
-          <AdminTweetList className={styles.list} listTweets={tweets} />
+          {!isLoading ? (
+            <AdminTweetList className={styles.list} listItems={tweets} />
+          ) : undefined}
+          <MoonLoader
+            color="#FF974A"
+            loading={isLoading}
+            speedMultiplier={1}
+            cssOverride={{
+              margin: '0 auto',
+              position: 'relative',
+              top: '25%',
+            }}
+          />
         </div>
       </div>
     </div>
