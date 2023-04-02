@@ -1,19 +1,19 @@
 import AdminUserCardItem from 'admin/AdminUserCard/AdminUserCardItem';
-// import Card from 'shared/components/UIElements/Card';
 import styles from 'admin/AdminUserCard/AdminUserCardList.module.scss';
 
 function AdminUserCardList({ cardItems }) {
   const adminUserCardList = cardItems.map((cardItem) => {
     return (
       <AdminUserCardItem
-        key={cardItem.id}
-        name={cardItem.name}
-        userName={cardItem.userName}
-        commentCount={cardItem.commentCount}
-        likeCount={cardItem.likeCount}
-        followingCount={cardItem.followingCount}
-        followerCount={cardItem.followerCount}
-        avatar={cardItem.avatar}
+        key={cardItem?.id}
+        name={cardItem?.name}
+        userAccountName={cardItem?.account}
+        tweetsCount={cardItem?.TweetsCount}
+        likeCount={cardItem?.LikesCount}
+        followingCount={cardItem?.FollowingsCount}
+        followerCount={cardItem?.FollowersCount}
+        avatar={cardItem?.avatar}
+        coverImage={cardItem?.coverImage}
       />
     );
   });

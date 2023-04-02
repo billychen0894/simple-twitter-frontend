@@ -5,7 +5,6 @@
   border-radius: 16px 0px 0 0;
 }
 
-
 .banner {
   display: flex;
   flex-shrink: 0;
@@ -22,24 +21,4 @@
     border-radius: 10px 10px 0 0;
     object-fit: cover;
   }
-
-  .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 10px 10px 0 0;
-    background-color: rgba(0, 0, 0, 0.2);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  &:hover,
-  &:active {
-    .overlay {
-      opacity: 1;
-    }
-  }
 }
-

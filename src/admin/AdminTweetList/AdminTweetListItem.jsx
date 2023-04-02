@@ -9,8 +9,8 @@ function AdminTweetListItem({
   content,
   time,
   userAvatar,
+  onHandleDeleteUserTweet,
 }) {
-  console.log('tweetId', tweetId);
   return (
     <div className={styles.container}>
       <Avatar className={styles.avatar} image={userAvatar} />
@@ -24,7 +24,11 @@ function AdminTweetListItem({
         <div className={styles.contentContainer}>
           <span className={styles.content}>{content}</span>
         </div>
-        <div className={styles.closeIcon}>
+        <div
+          className={styles.closeIcon}
+          onClick={() => onHandleDeleteUserTweet(tweetId)}
+          role="presentation"
+        >
           <CloseIcon />
         </div>
       </div>

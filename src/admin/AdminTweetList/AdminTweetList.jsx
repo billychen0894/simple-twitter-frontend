@@ -2,7 +2,7 @@ import AdminTweetListItem from 'admin/AdminTweetList/AdminTweetListItem';
 import { formattingTime } from 'shared/utils/formattingTime';
 import styles from 'admin/AdminTweetList/AdminTweetList.module.scss';
 
-function AdminTweetList({ listItems }) {
+function AdminTweetList({ listItems, onHandleDeleteUserTweet }) {
   const content = listItems.map((item) => {
     return (
       <AdminTweetListItem
@@ -13,6 +13,7 @@ function AdminTweetList({ listItems }) {
         content={item?.description}
         userAvatar={item?.User.avatar}
         time={formattingTime(item?.createdAt)}
+        onHandleDeleteUserTweet={onHandleDeleteUserTweet}
       />
     );
   });
