@@ -1,0 +1,116 @@
+@use 'styles/abstracts' as *;
+.cardContainer {
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #f6f7f8;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: rem(210);
+  height: rem(314);
+}
+
+.banner {
+  position: absolute;
+  top: 0;
+}
+
+.userInfo {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.avatarWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  width: 6.5rem;
+  height: 6.5rem;
+}
+
+.avatar {
+  border: 0.2rem solid white;
+  border-radius: 50%;
+  position: relative;
+  top: 0rem;
+  width: 100%;
+  height: 100%;
+  img,
+  .overlay,
+  .defaultAvatar {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.userName {
+  color: var(--color-shades-1000);
+  font-size: var(--font-size-300);
+  font-weight: 700;
+  margin: 0.4rem 0;
+}
+
+.userAccountName {
+  color: var(--color-secondary-300);
+  font-size: var(--font-size-200);
+  font-weight: 400;
+  margin-bottom: 0.7rem;
+}
+
+.tweetsRelatedCount {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.tweetIcon {
+  path {
+    fill: var(--color-shades-800);
+  }
+}
+
+.likeIcon {
+  path {
+    fill: var(--color-secondary-300);
+  }
+}
+.tweetCount {
+  margin-right: 0.8rem;
+  font-size: var(--font-size-300);
+}
+
+.likeCount {
+  font-size: var(--font-size-300);
+}
+
+.likeCount,
+.tweetCount {
+  position: relative;
+  bottom: -0.125rem;
+}
+
+.followRelatedCount {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+  font-size: var(--font-size-200);
+}
+
+.followingRelatedText {
+  color: var(--color-secondary-300);
+}
+.followerCount,
+.followingCount {
+  color: var(--color-shades-1000);
+  margin: 0 1rem;
+}

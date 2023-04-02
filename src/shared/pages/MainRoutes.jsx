@@ -1,17 +1,20 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import RootLayout from 'shared/pages/RootLayout';
-import TweetModal from 'users/components/TweetModal/TweetModal';
-import UserProfile from 'userProfile/pages/UserProfile';
-import TweetList from 'users/components/TweetList/TweetList';
-import UserTweetReply from 'users/pages/UserTweetReply';
-import UserTweet from 'users/pages/UserTweet';
-import Setting from 'shared/pages/Setting';
+import AdminMain from 'admin/pages/AdminMain';
+import AdminUserList from 'admin/pages/AdminUserList';
+import { useAuth } from 'contexts/AuthContext';
+import AdminLogin from 'shared/pages/AdminLogin';
 import Login from 'shared/pages/Login';
 import Register from 'shared/pages/Register';
-import AdminLogin from 'shared/pages/AdminLogin';
+import RootLayout from 'shared/pages/RootLayout';
+import Setting from 'shared/pages/Setting';
+import UserProfile from 'userProfile/pages/UserProfile';
+import TweetList from 'users/components/TweetList/TweetList';
+import TweetModal from 'users/components/TweetModal/TweetModal';
+import UserTweet from 'users/pages/UserTweet';
+import UserTweetReply from 'users/pages/UserTweetReply';
 import PrivateRoutes from 'shared/utils/PrivateRoutes';
-import { useAuth } from 'contexts/AuthContext';
+import AdminRootLayout from 'admin/pages/AdminRootLayout';
 
 function MainRoutes({ location }) {
   const { currentUser } = useAuth();
@@ -21,8 +24,17 @@ function MainRoutes({ location }) {
       <Route path="login" element={<Login />} />
       <Route path="admin_login" element={<AdminLogin />} />
       <Route path="register" element={<Register />} />
+      <Route path="/unauthorized" element={<div>unauthorized</div>} />
       <Route path="*" element={<Navigate to="login" />} />
-      <Route element={<PrivateRoutes />}>
+
+      <Route element={<PrivateRoutes allowedRoles="admin" />}>
+        <Route element={<AdminRootLayout />}>
+          <Route path="admin" element={<AdminMain />} />
+          <Route path="admin_users" element={<AdminUserList />} />
+        </Route>
+      </Route>
+
+      <Route element={<PrivateRoutes allowedRoles="user" />}>
         <Route element={<RootLayout />}>
           <Route path="setting" element={<Setting userData={currentUser} />} />
           <Route path="home" element={<UserTweet />}>

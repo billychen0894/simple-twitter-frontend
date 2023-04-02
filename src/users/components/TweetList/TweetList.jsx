@@ -1,10 +1,11 @@
-import TweetListItem from 'users/components/TweetList/TweetListItem';
-import styles from 'users/components/TweetList/TweetList.module.scss';
-import { formattingTime } from 'shared/utils/formattingTime';
 import { useParams } from 'react-router-dom';
-import { useUsers } from 'contexts/UsersContext';
 import { useEffect } from 'react';
 import { MoonLoader } from 'react-spinners';
+
+import TweetListItem from 'users/components/TweetList/TweetListItem';
+import { formattingTime } from 'shared/utils/formattingTime';
+import { useUsers } from 'contexts/UsersContext';
+import styles from 'users/components/TweetList/TweetList.module.scss';
 
 function TweetList({ listType, followType, currentAccountName, listItems }) {
   let content;

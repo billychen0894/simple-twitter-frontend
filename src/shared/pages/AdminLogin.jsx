@@ -1,4 +1,5 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 import { ReactComponent as SiteLogo } from 'assets/icons/logoIcon.svg';
 import Input from 'shared/components/UIElements/Input';
@@ -9,10 +10,9 @@ import {
   VALIDATOR_REQUIRE,
 } from 'shared/utils/validators';
 import useForm from 'hooks/useForm';
+import { useAuth } from 'contexts/AuthContext';
 import styles from 'shared/pages/Login.module.scss';
 import 'styles/global.scss';
-import { useAuth } from 'contexts/AuthContext';
-import { useEffect, useState } from 'react';
 
 function AdminLogin() {
   const initialFormInputs = {
@@ -27,15 +27,8 @@ function AdminLogin() {
   };
 
   const [formState, handleInput] = useForm(initialFormInputs, false);
-  const { adminLogin, isAuthenticated, role } = useAuth();
+  const { adminLogin } = useAuth();
   const [loginError, setLoginError] = useState(false);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (isAuthenticated && role === 'admin') {
-      navigate('/admin');
-    }
-  }, [isAuthenticated, navigate, role]);
 
   const handleAdminLogin = async (e) => {
     e.preventDefault();
@@ -52,7 +45,6 @@ function AdminLogin() {
     const { status } = response;
     if (status === 'error') {
       setLoginError(true);
-      navigate('/admin_login');
     }
   };
 

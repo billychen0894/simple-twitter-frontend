@@ -1,6 +1,5 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-// import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { ReactComponent as SiteLogo } from 'assets/icons/logoIcon.svg';
@@ -28,17 +27,8 @@ function Login() {
   };
 
   const [formState, handleInput] = useForm(initialFormInputs, false);
-  const { userLogin, isAuthenticated } = useAuth();
+  const { userLogin } = useAuth();
   const [loginError, setLoginError] = useState(false);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    // this condition should also check role if it's users
-    console.log(window.location.pathname);
-    if (isAuthenticated && window.location.pathname !== '/home') {
-      navigate('/home');
-    }
-  }, [isAuthenticated, navigate]);
 
   const handleUserLogin = async (e) => {
     e.preventDefault();

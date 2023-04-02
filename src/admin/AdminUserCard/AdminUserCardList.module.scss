@@ -1,0 +1,43 @@
+@use 'styles/abstracts' as *;
+
+.AdminCards {
+  min-height: 100vh;
+  min-height: 100svh;
+  max-width: rem(920);
+  margin: rem(16);
+}
+
+.cardContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px 0;
+}
+
+.grid-item {
+  width: 210px;
+  height: 314px;
+}
+
+@media (min-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 400px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+}

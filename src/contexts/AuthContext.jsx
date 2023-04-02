@@ -52,6 +52,7 @@ export function AuthProvider({ children }) {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const tokenData = retrieveStoredToken();
+  const location = useLocation();
   let initialToken;
 
   if (tokenData?.token) {
@@ -65,6 +66,7 @@ export function AuthProvider({ children }) {
       if (!authToken) {
         setIsAuthenticated(false);
         setPayload(null);
+        setRole(null);
       }
 
       if (authToken) {
@@ -72,9 +74,11 @@ export function AuthProvider({ children }) {
 
         setIsAuthenticated(true);
         setPayload(tempPayload);
+        setRole(tempPayload?.role);
       } else {
         setIsAuthenticated(false);
         setPayload(null);
+        setRole(null);
       }
     };
 
@@ -84,6 +88,7 @@ export function AuthProvider({ children }) {
   const logoutHandler = useCallback(async () => {
     localStorage.removeItem('authToken');
     localStorage.removeItem('expirationTime');
+    localStorage.removeItem('role');
     setPayload(null);
     setIsAuthenticated(false);
     setAuthToken(null);
@@ -116,16 +121,16 @@ export function AuthProvider({ children }) {
       const { status, data: result } = response;
 
       if (status === 'success') {
+        const from = location?.state?.from.pathname || '/home';
         const { token } = result;
         const tempPayload = decode(token);
 
         // get the expiration time from the decoded payload
-        const { exp, user } = tempPayload;
 
         // convert the expiration time to Unix timestamp
-        const expTimestamp = new Date(exp * 1000).getTime();
+        const expTimestamp = new Date(tempPayload.exp * 1000).getTime();
 
-        if (user?.role === 'user') {
+        if (tempPayload?.role === 'user') {
           setRole('user');
         }
         toast.success('登入成功');
@@ -135,7 +140,9 @@ export function AuthProvider({ children }) {
         setAuthToken(token);
 
         localStorage.setItem('authToken', token);
+        localStorage.setItem('role', tempPayload?.role);
         localStorage.setItem('expirationTime', expTimestamp.toString());
+        navigate(from, { replace: true });
       } else {
         // to log out the user if token is expired and calculate remaining time
         const storedExpirationTime = localStorage.getItem('expirationTime');
@@ -154,7 +161,7 @@ export function AuthProvider({ children }) {
       setIsLoading(false);
       return response;
     },
-    [logoutHandler]
+    [logoutHandler, location?.state?.from.pathname, navigate]
   );
 
   const adminLoginHandler = useCallback(
@@ -169,16 +176,16 @@ export function AuthProvider({ children }) {
       const { status, data: result } = response;
 
       if (status === 'success') {
+        const from = location?.state?.from.pathname || '/admin';
         const { token } = result;
         const tempPayload = decode(token);
 
         // get the expiration time from the decoded payload
-        const { exp, user } = tempPayload;
 
         // convert the expiration time to Unix timestamp
-        const expTimestamp = new Date(exp * 1000).getTime();
+        const expTimestamp = new Date(tempPayload.exp * 1000).getTime();
 
-        if (user?.role === 'admin') {
+        if (tempPayload?.role === 'admin') {
           setRole('admin');
         }
         toast.success('登入成功!');
@@ -188,7 +195,9 @@ export function AuthProvider({ children }) {
         setAuthToken(token);
 
         localStorage.setItem('authToken', token);
+        localStorage.setItem('role', tempPayload?.role);
         localStorage.setItem('expirationTime', expTimestamp.toString());
+        navigate(from, { replace: true });
       } else {
         // to log out the user if token is expired and calculate remaining time
         const storedExpirationTime = localStorage.getItem('expirationTime');
@@ -207,7 +216,7 @@ export function AuthProvider({ children }) {
       setIsLoading(false);
       return response;
     },
-    [logoutHandler]
+    [logoutHandler, location?.state?.from.pathname, navigate]
   );
 
   const registerHandler = useCallback(

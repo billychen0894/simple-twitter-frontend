@@ -1,0 +1,113 @@
+@use 'styles/abstracts' as *;
+
+// default reply list styling
+.container {
+  display: flex;
+  width: 100%;
+  padding: 1rem 1.5rem 0.5rem 1.5rem;
+  line-height: 1.5rem;
+  font-size: var(--font-size-300);
+  border-bottom: 1px solid #e6ecf0;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  transition: background-color 0.3s;
+  cursor: pointer;
+
+  &:hover,
+  &:active {
+    background-color: rgba(229, 229, 229, 0.3);
+  }
+}
+
+.tweetListItem {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  position: relative;
+}
+
+.avatar {
+  align-items: start;
+  margin-right: 1rem;
+}
+
+.info {
+  display: flex;
+  gap: 0.5rem;
+  color: var(--color-secondary-300);
+  font-weight: 400;
+  align-items: center;
+
+  .name,
+  .username {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .username {
+    font-size: var(--font-size-200);
+  }
+
+  .name {
+    display: block;
+    color: var(--color-shades-1000);
+    font-weight: 700;
+    font-size: var(--font-size-300);
+
+    &:hover,
+    &:active {
+      text-decoration: var(--color-shades-1000) underline 2px;
+    }
+  }
+}
+
+.contentContainer {
+  font-size: var(--font-size-300);
+  font-weight: 400;
+}
+
+.content {
+  display: block;
+  font-size: inherit;
+  font-weight: inherit;
+  margin-top: 0.5rem;
+}
+
+.ratingContainer {
+  display: flex;
+  gap: 3rem;
+}
+
+.infoBtn {
+  line-height: rem(18);
+  padding: 0.5rem 1rem;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.closeIcon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  max-width: 20px;
+  cursor: pointer;
+
+  svg {
+    position: relative;
+    top: 0.125em;
+  }
+  svg path {
+    cursor: pointer;
+    fill: var(--color-shades-800);
+  }
+
+  &:hover,
+  &:active {
+    svg path {
+      fill: var(--color-shades-600);
+    }
+  }
+}

@@ -1,11 +1,21 @@
-import { Outlet, Navigate } from 'react-router-dom';
+import { Outlet, Navigate, useLocation } from 'react-router-dom';
 
-import { useAuth } from 'contexts/AuthContext';
+function PrivateRoutes({ allowedRoles }) {
+  const location = useLocation();
+  const authToken = localStorage.getItem('authToken');
+  const role = localStorage.getItem('role');
 
-function PrivateRoutes() {
-  const { isAuthenticated } = useAuth();
+  if (authToken && allowedRoles === role) {
+    return <Outlet />;
+  }
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="login" />;
+  if (authToken && allowedRoles !== role) {
+    return <Navigate to="/unauthorized" state={{ from: location }} replace />;
+  }
+
+  if (!authToken) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
 }
 
 export default PrivateRoutes;

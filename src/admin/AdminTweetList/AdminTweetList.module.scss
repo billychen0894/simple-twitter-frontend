@@ -1,0 +1,12 @@
+@use 'styles/abstracts' as *;
+
+.tweetList {
+  display: flex;
+  flex-direction: column;
+}
+
+.spinner {
+  margin: 50px auto;
+  position: relative;
+  top: 50%;
+}

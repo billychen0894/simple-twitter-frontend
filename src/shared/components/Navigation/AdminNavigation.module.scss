@@ -1,0 +1,100 @@
+@use 'styles/abstracts' as *;
+
+.mainNavigation {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  height: 100svh;
+  text-align: center;
+}
+
+.mainHeader {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  min-width: rem(56);
+  max-width: 25rem;
+}
+
+.navLinksWrapper {
+  padding: 0 1rem;
+}
+
+.logoWrapper {
+  margin-top: 1rem;
+}
+
+.logo {
+  margin-bottom: rem(32);
+}
+
+.navLinks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logout {
+  cursor: pointer;
+  color: var(--color-shades-900);
+  font-weight: 700;
+  margin-bottom: 1rem;
+
+  svg {
+    height: 1.5em;
+    width: 1.5em;
+
+    path {
+      stroke: var(--color-shades-900);
+    }
+  }
+}
+
+.logoutText {
+  display: none;
+}
+
+@include mq(large-screen) {
+  .mainNavigation {
+    width: rem(178);
+    text-align: initial;
+  }
+
+  .logo {
+    position: relative;
+    top: -5px;
+    left: -5px;
+  }
+
+  .logoWrapper {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  .logout {
+    display: flex;
+
+    svg {
+      margin-right: 1rem;
+      height: 1.25em;
+      width: 1.25em;
+    }
+  }
+
+  .logoutText {
+    display: flex;
+    align-items: center;
+  }
+
+  .navLinks {
+    align-items: initial;
+  }
+
+  .mainHeader {
+    flex: 1;
+    max-width: 30rem;
+    width: rem(178);
+  }
+}
