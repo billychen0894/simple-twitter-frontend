@@ -52,7 +52,6 @@ export function AuthProvider({ children }) {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const tokenData = retrieveStoredToken();
-  const location = useLocation();
   let initialToken;
 
   if (tokenData?.token) {
@@ -121,7 +120,6 @@ export function AuthProvider({ children }) {
       const { status, data: result } = response;
 
       if (status === 'success') {
-        const from = location?.state?.from.pathname || '/home';
         const { token } = result;
         const tempPayload = decode(token);
 
@@ -142,7 +140,7 @@ export function AuthProvider({ children }) {
         localStorage.setItem('authToken', token);
         localStorage.setItem('role', tempPayload?.role);
         localStorage.setItem('expirationTime', expTimestamp.toString());
-        navigate(from, { replace: true });
+        navigate('/home', { replace: true });
       } else {
         // to log out the user if token is expired and calculate remaining time
         const storedExpirationTime = localStorage.getItem('expirationTime');
@@ -161,7 +159,7 @@ export function AuthProvider({ children }) {
       setIsLoading(false);
       return response;
     },
-    [logoutHandler, location?.state?.from.pathname, navigate]
+    [logoutHandler, navigate]
   );
 
   const adminLoginHandler = useCallback(
@@ -176,7 +174,6 @@ export function AuthProvider({ children }) {
       const { status, data: result } = response;
 
       if (status === 'success') {
-        const from = location?.state?.from.pathname || '/admin';
         const { token } = result;
         const tempPayload = decode(token);
 
@@ -197,7 +194,7 @@ export function AuthProvider({ children }) {
         localStorage.setItem('authToken', token);
         localStorage.setItem('role', tempPayload?.role);
         localStorage.setItem('expirationTime', expTimestamp.toString());
-        navigate(from, { replace: true });
+        navigate('/admin', { replace: true });
       } else {
         // to log out the user if token is expired and calculate remaining time
         const storedExpirationTime = localStorage.getItem('expirationTime');
@@ -216,7 +213,7 @@ export function AuthProvider({ children }) {
       setIsLoading(false);
       return response;
     },
-    [logoutHandler, location?.state?.from.pathname, navigate]
+    [logoutHandler, navigate]
   );
 
   const registerHandler = useCallback(

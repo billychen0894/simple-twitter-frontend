@@ -6,6 +6,8 @@ import Rating from 'shared/components/UIElements/Rating';
 import { ModalContentContext } from 'contexts/ModalContentContext';
 import styles from 'users/components/TweetReply/TweetReply.module.scss';
 import { useTweets } from 'contexts/TweetsContext';
+import { useAuth } from 'contexts/AuthContext';
+import { toast } from 'react-toastify';
 
 function TweetReply({
   image,
@@ -22,6 +24,7 @@ function TweetReply({
   onClickLike,
   handleLikes,
 }) {
+  const { currentUser } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const modalContentCtx = useContext(ModalContentContext);
@@ -30,12 +33,22 @@ function TweetReply({
 
   const handleModalType = (e) => {
     e.stopPropagation();
+    if (currentUser?.id && currentUser?.id === userId) {
+      toast.warn('不能對自己的推文做回覆');
+      return;
+    }
+
     handleModalClick('reply');
     handleModalReplyTweetId(tweetId);
   };
 
   const handleToggleLike = async (e) => {
     e.stopPropagation();
+
+    if (currentUser?.id && currentUser?.id === userId) {
+      toast.warn('不能對自己的推文按讚');
+      return;
+    }
 
     if (isLiked) {
       await unlikeTweet(tweetId);
@@ -95,18 +108,27 @@ function TweetReply({
         </div>
         <hr className={styles.divider} />
         <div className={styles.iconsContainer}>
-          <Link
-            to="/compose/tweet"
-            className={styles.link}
-            state={{ background: location, action: 'TWEET' }}
-            onClick={handleModalType}
-          >
+          {currentUser?.id !== userId ? (
+            <Link
+              to="/compose/tweet"
+              className={styles.link}
+              state={{ background: location, action: 'TWEET' }}
+              onClick={handleModalType}
+            >
+              <Rating
+                comment
+                className={styles.commentIcon}
+                style={{ width: '2.5rem', height: '2.5rem' }}
+              />
+            </Link>
+          ) : (
             <Rating
               comment
               className={styles.commentIcon}
               style={{ width: '2.5rem', height: '2.5rem' }}
+              onClick={handleModalType}
             />
-          </Link>
+          )}
           <Rating
             like
             toggleLike={isLiked}

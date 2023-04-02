@@ -51,6 +51,7 @@ function UserTweetReply() {
             name={currentTweet?.User.name}
             username={currentTweet?.User.account}
             tweetContent={currentTweet?.description}
+            userId={currentTweet?.UserId}
             time={time}
             date={date}
             commentCount={replies.length}
