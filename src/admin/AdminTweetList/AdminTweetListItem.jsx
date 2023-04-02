@@ -1,23 +1,32 @@
 import Avatar from 'shared/components/UIElements/Avatar';
-import styles from 'admin/AdminTweetList/AdminTweetListItem.module.scss';
 import { ReactComponent as CloseIcon } from 'assets/icons/closeIcon.svg';
-// import { useTweets } from 'contexts/TweetContext';
+import styles from 'admin/AdminTweetList/AdminTweetListItem.module.scss';
 
-function AdminTweetListItem({ name, userName, content, time }) {
-  // const { deleteTweet } = useTweets();
-
+function AdminTweetListItem({
+  tweetId,
+  name,
+  userAccountName,
+  content,
+  time,
+  userAvatar,
+}) {
+  console.log('tweetId', tweetId);
   return (
-    <div className={styles.tweetContainer}>
-      <Avatar className={styles.avatar} />
-      <div className={styles.info}>
-        <span className={styles.name}>{name}</span>
-        <span className={styles.userName}>@{userName}</span>
-        <span>·</span>
-        <span className={styles.time}>{time}</span>
-        <p className={styles.tweetContent}>{content}</p>
-      </div>
-      <div className={`${styles.iconContainer} ${styles.closeIcon}`}>
-        <CloseIcon />
+    <div className={styles.container}>
+      <Avatar className={styles.avatar} image={userAvatar} />
+      <div className={styles.tweetListItem}>
+        <div className={styles.info}>
+          <span className={styles.name}>{name}</span>
+          <span className={styles.username}>@{userAccountName}</span>
+          <span>·</span>
+          <time className={styles.time}>{time}</time>
+        </div>
+        <div className={styles.contentContainer}>
+          <span className={styles.content}>{content}</span>
+        </div>
+        <div className={styles.closeIcon}>
+          <CloseIcon />
+        </div>
       </div>
     </div>
   );

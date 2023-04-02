@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-// import { debounce } from 'lodash';
 
 import MainHeader from 'shared/components/Navigation/MainHeader';
 import Button from 'shared/components/UIElements/Button';
@@ -9,8 +8,8 @@ import { ReactComponent as SiteLogo } from 'assets/icons/logoIcon.svg';
 import { ReactComponent as LogoutIcon } from 'assets/icons/logoutIcon.svg';
 import { ReactComponent as TweetPostBtn } from 'assets/icons/tweetIcon.svg';
 import { ModalContentContext } from 'contexts/ModalContentContext';
-import styles from 'shared/components/Navigation/MainNavigation.module.scss';
 import { useAuth } from 'contexts/AuthContext';
+import styles from 'shared/components/Navigation/MainNavigation.module.scss';
 
 function MainNavigation() {
   const location = useLocation();

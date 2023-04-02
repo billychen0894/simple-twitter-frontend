@@ -5,7 +5,6 @@ function PrivateRoutes({ allowedRoles }) {
   const { isAuthenticated, role } = useAuth();
 
   if (allowedRoles.includes(role)) {
-    console.log('alllowedRoles', role);
     return <Outlet />;
   }
 

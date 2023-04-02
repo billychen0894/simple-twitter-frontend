@@ -1,28 +1,21 @@
 @use 'styles/abstracts' as *;
 
-.container {
-  max-width: 90vw;
-  display: flex;
-  position: absolute;
-}
-
-.main {
-  width: 75rem;
-  height: 100vh;
-  position: fixed;
-  left: 14rem;
-}
-.navigation {
-  margin-right: 3rem;
-}
-.header {
+.adminMainContainer {
+  min-height: 100vh;
+  min-height: 100svh;
   width: 100%;
+  margin-left: 0;
+  border: 1px solid #e6ecf0;
 }
 
-@include mq(large-screen) {
-  .main {
-    width: 100%;
-    position: fixed;
-    left: 20rem;
+@include mq(small-medium-screen) {
+  .adminMainContainer {
+    width: 939px;
+  }
+}
+
+@include mq(medium-screen) {
+  .adminMainContainer {
+    margin: 0 rem(23);
   }
 }

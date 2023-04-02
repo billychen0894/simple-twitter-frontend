@@ -15,6 +15,7 @@ import UserTweet from 'users/pages/UserTweet';
 import UserTweetReply from 'users/pages/UserTweetReply';
 import PrivateRoutes from 'shared/utils/PrivateRoutes';
 import { useEffect } from 'react';
+import AdminRootLayout from 'admin/pages/AdminRoute';
 
 function MainRoutes({ location }) {
   const { currentUser, isAuthenticated, role } = useAuth();
@@ -39,8 +40,10 @@ function MainRoutes({ location }) {
       <Route path="*" element={<Navigate to="login" />} />
 
       <Route element={<PrivateRoutes allowedRoles={['admin']} />}>
-        <Route path="admin" element={<AdminMain />} />
-        <Route path="admin_users" element={<AdminUserList />} />
+        <Route element={<AdminRootLayout />}>
+          <Route path="admin" element={<AdminMain />} />
+          <Route path="admin_users" element={<AdminUserList />} />
+        </Route>
       </Route>
 
       <Route element={<PrivateRoutes allowedRoles={['user']} />}>

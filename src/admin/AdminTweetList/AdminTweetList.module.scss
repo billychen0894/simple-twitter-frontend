@@ -1,40 +1,12 @@
 @use 'styles/abstracts' as *;
 
-.AdminTweets{
-  position: absolute;
-  left: 0;
-  min-height: 100vh;
-  min-height: 100svh;
-  width: 75rem;
-}
-
-.adminTweetListContainer {
-  width: 40%;
+.tweetList {
   display: flex;
   flex-direction: column;
 }
 
-
-h2 {
-  font-size: var(--font-size-400);
-  margin: 1rem 1.625rem;
-}
-
-
-@include mq(small-medium-screen) {
-  .adminTweetListContainer {
-    width: 65%;
-  }
-}
-
-@include mq(medium-screen) {
-  .adminTweetListContainer {
-    width: 80%;
-  }
-}
-
-@include mq(large-screen) {
-  .adminTweetListContainer {
-      width: 94%;
-    }
+.spinner {
+  margin: 50px auto;
+  position: relative;
+  top: 50%;
 }

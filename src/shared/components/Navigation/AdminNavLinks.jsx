@@ -6,7 +6,6 @@ import { ReactComponent as ActiveProfileIcon } from 'assets/icons/ActiveProfileI
 import styles from 'shared/components/Navigation/NavLinks.module.scss';
 
 function AdminNavLinks() {
-  // const root = 'root';
   return (
     <ul className={styles.navLinks}>
       <li>

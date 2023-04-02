@@ -1,27 +1,22 @@
-import styles from 'admin/AdminTweetList/AdminTweetList.module.scss';
 import AdminTweetListItem from 'admin/AdminTweetList/AdminTweetListItem';
+import { formattingTime } from 'shared/utils/formattingTime';
+import styles from 'admin/AdminTweetList/AdminTweetList.module.scss';
 
 function AdminTweetList({ listItems }) {
-  const AdminContent = listItems.map((item) => {
+  const content = listItems.map((item) => {
     return (
       <AdminTweetListItem
-        key={item.userId}
-        userId={item.userId}
-        tweetId={item.tweetId}
-        name={item.name}
-        userName={item.userName}
-        content={item.content || item.replyContent}
-        time={item.createdAt}
+        key={item.id}
+        tweetId={item?.id}
+        name={item?.User.name}
+        userAccountName={item?.User.account}
+        content={item?.description}
+        userAvatar={item?.User.avatar}
+        time={formattingTime(item?.createdAt)}
       />
     );
   });
-  return (
-    <div className={styles.AdminTweets}>
-      <article className={styles.adminTweetListContainer}>
-        {AdminContent}
-      </article>
-    </div>
-  );
+  return <article className={styles.tweetList}>{content}</article>;
 }
 
 export default AdminTweetList;

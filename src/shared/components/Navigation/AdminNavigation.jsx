@@ -1,23 +1,33 @@
 import { NavLink } from 'react-router-dom';
-import AdminMainHeader from 'shared/components/Navigation/AdminMainHeader';
+
 import AdminNavLinks from 'shared/components/Navigation/AdminNavLinks';
 import { ReactComponent as SiteLogo } from 'assets/icons/logoIcon.svg';
 import { ReactComponent as LogoutIcon } from 'assets/icons/logoutIcon.svg';
-import styles from 'shared/components/Navigation/AdminNavigation.module.scss';
+import MainHeader from 'shared/components/Navigation/MainHeader';
+import { useAuth } from 'contexts/AuthContext';
+import styles from 'shared/components/Navigation/MainNavigation.module.scss';
 
 function AdminNavigation() {
+  const { logout } = useAuth();
+  const handleLogout = () => {
+    logout();
+  };
   return (
-    <AdminMainHeader>
-      <div className={styles.adminNavigationContainter}>
-        <div className={styles.adminNavLinks}>
+    <MainHeader>
+      <div className={styles.mainNavigation}>
+        <div className={styles.navLinks}>
           <NavLink to="/admin" className={styles.logoWrapper}>
-            <SiteLogo />
+            <SiteLogo className={styles.logo} />
           </NavLink>
-          <nav className={styles.adminNavLinksWrapper}>
+          <nav className={styles.navLinksWrapper}>
             <AdminNavLinks />
           </nav>
         </div>
-        <div className={styles.logout}>
+        <div
+          className={styles.logout}
+          onClick={handleLogout}
+          role="presentation"
+        >
           <div className={styles.logoutIcon}>
             <LogoutIcon />
           </div>
@@ -26,7 +36,7 @@ function AdminNavigation() {
           </div>
         </div>
       </div>
-    </AdminMainHeader>
+    </MainHeader>
   );
 }
 

@@ -1,18 +1,18 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import AdminMain from 'admin/pages/AdminMain';
-import AdminUserList from 'admin/pages/AdminUserList';
+import { Outlet } from 'react-router-dom';
 
-function AdminRoute() {
+import AdminNavigation from 'shared/components/Navigation/AdminNavigation';
+
+function AdminRootLayout() {
   return (
-    <div className="routComtainer">
-      <BrowserRouter>
-        <Routes>
-          <Route path="admin_main" element={<AdminMain />} />
-          <Route path="admin_user_list" element={<AdminUserList />} />
-        </Routes>
-      </BrowserRouter>
+    <div className="app-container">
+      <AdminNavigation />
+      <div className="content-container">
+        <main className="main-content">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 }
 
-export default AdminRoute;
+export default AdminRootLayout;
