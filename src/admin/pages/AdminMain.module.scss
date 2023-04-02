@@ -8,14 +8,8 @@
   border: 1px solid #e6ecf0;
 }
 
-@include mq(small-medium-screen) {
-  .adminMainContainer {
-    width: 939px;
-  }
-}
-
 @include mq(medium-screen) {
   .adminMainContainer {
-    margin: 0 rem(23);
+    width: 939px;
   }
 }
