@@ -14,17 +14,10 @@ import TweetModal from 'users/components/TweetModal/TweetModal';
 import UserTweet from 'users/pages/UserTweet';
 import UserTweetReply from 'users/pages/UserTweetReply';
 import PrivateRoutes from 'shared/utils/PrivateRoutes';
-import AdminRootLayout from 'admin/pages/AdminRoute';
+import AdminRootLayout from 'admin/pages/AdminRootLayout';
 
 function MainRoutes({ location }) {
   const { currentUser } = useAuth();
-
-  // useEffect(() => {
-  //   const authToken = localStorage.getItem('authToken');
-  //   if (authToken) {
-  //     navigate(redirectHomePath);
-  //   }
-  // }, [navigate, redirectHomePath]);
 
   return (
     <Routes location={location}>

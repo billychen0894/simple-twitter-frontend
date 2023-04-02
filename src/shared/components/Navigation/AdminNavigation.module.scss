@@ -1,6 +1,6 @@
 @use 'styles/abstracts' as *;
 
-.adminNavigationContainter {
+.mainNavigation {
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -8,11 +8,17 @@
   height: 100vh;
   height: 100svh;
   text-align: center;
-  left: 5rem;
 }
 
-.adminNavLinksWrapper {
-  margin-top: 1.5rem;
+.mainHeader {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  min-width: rem(56);
+  max-width: 25rem;
+}
+
+.navLinksWrapper {
   padding: 0 1rem;
 }
 
@@ -22,6 +28,12 @@
 
 .logo {
   margin-bottom: rem(32);
+}
+
+.navLinks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .logout {
@@ -45,7 +57,7 @@
 }
 
 @include mq(large-screen) {
-  .adminNavigationContainter {
+  .mainNavigation {
     width: rem(178);
     text-align: initial;
   }
@@ -63,7 +75,6 @@
 
   .logout {
     display: flex;
-    padding-left: 1.2rem;
 
     svg {
       margin-right: 1rem;
@@ -79,5 +90,11 @@
 
   .navLinks {
     align-items: initial;
+  }
+
+  .mainHeader {
+    flex: 1;
+    max-width: 30rem;
+    width: rem(178);
   }
 }

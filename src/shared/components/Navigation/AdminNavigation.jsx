@@ -3,9 +3,8 @@ import { NavLink } from 'react-router-dom';
 import AdminNavLinks from 'shared/components/Navigation/AdminNavLinks';
 import { ReactComponent as SiteLogo } from 'assets/icons/logoIcon.svg';
 import { ReactComponent as LogoutIcon } from 'assets/icons/logoutIcon.svg';
-import MainHeader from 'shared/components/Navigation/MainHeader';
 import { useAuth } from 'contexts/AuthContext';
-import styles from 'shared/components/Navigation/MainNavigation.module.scss';
+import styles from 'shared/components/Navigation/AdminNavigation.module.scss';
 
 function AdminNavigation() {
   const { logout } = useAuth();
@@ -13,7 +12,7 @@ function AdminNavigation() {
     logout();
   };
   return (
-    <MainHeader>
+    <header className={styles.mainHeader}>
       <div className={styles.mainNavigation}>
         <div className={styles.navLinks}>
           <NavLink to="/admin" className={styles.logoWrapper}>
@@ -36,7 +35,7 @@ function AdminNavigation() {
           </div>
         </div>
       </div>
-    </MainHeader>
+    </header>
   );
 }
 

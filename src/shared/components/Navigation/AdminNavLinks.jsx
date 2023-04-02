@@ -27,8 +27,9 @@ function AdminNavLinks() {
       </li>
       <li>
         <NavLink
-          to="/admin_user_list"
+          to="/admin_users"
           className={({ isActive }) => (isActive ? styles.active : undefined)}
+          end
         >
           {({ isActive }) => (
             <>

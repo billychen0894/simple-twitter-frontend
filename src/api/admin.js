@@ -3,7 +3,7 @@ import sendRequest from 'api/utils';
 export const removeUserTweet = async (tweetId) => {
   try {
     const response = await sendRequest(`/admin/tweets/${tweetId}`, 'DELETE');
-    return response.data;
+    return response;
   } catch (error) {
     return error;
   }
