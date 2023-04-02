@@ -32,7 +32,6 @@ function TweetListItem({
 }) {
   const location = useLocation();
   const navigate = useNavigate();
-  // const [isUserFollowing, setIsUserFollowing] = useState(isFollowing);
 
   useEffect(() => {
     window.scrollTo(0, 0);
