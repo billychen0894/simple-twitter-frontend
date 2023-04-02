@@ -15,6 +15,7 @@ import styles from 'shared/pages/Login.module.scss';
 import 'styles/global.scss';
 import { useAuth } from 'contexts/AuthContext';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 function Register() {
   const initialFormInputs = {
@@ -48,6 +49,7 @@ function Register() {
     e.preventDefault();
 
     if (!formState.formIsValid) {
+      toast.error('請確保所有輸入欄位已填寫正確!');
       return;
     }
 
@@ -99,11 +101,11 @@ function Register() {
               element="input"
               type="text"
               placeholder=""
-              validators={[VALIDATOR_REQUIRE(), VALIDATOR_MAXLENGTH(12)]}
+              validators={[VALIDATOR_REQUIRE(), VALIDATOR_MAXLENGTH(50)]}
               onInput={handleInput}
               errorText={
-                formState.inputs.name.val.length > 12
-                  ? '名稱不能超過12個字數'
+                formState.inputs.name.val.length > 50
+                  ? '名稱不能超過50個字數'
                   : '請填寫名稱'
               }
               inputStyles={`${styles.input} ${
@@ -138,7 +140,7 @@ function Register() {
               validators={[VALIDATOR_REQUIRE(), VALIDATOR_MAXLENGTH(16)]}
               onInput={handleInput}
               errorText={
-                formState.inputs.password.val > 16
+                formState.inputs.password.val.length > 16
                   ? '密碼不能超過16個字數'
                   : '請輸入密碼'
               }

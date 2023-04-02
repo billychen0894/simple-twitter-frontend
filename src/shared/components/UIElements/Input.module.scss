@@ -6,35 +6,6 @@
   font-size: var(--font-size-300);
   line-height: initial;
 
-  input,
-  textarea {
-    position: relative;
-    display: inline-block;
-    width: 100%;
-    font: inherit;
-    border: none;
-    border-bottom: 2px solid #657786;
-    background: #f5f8fa;
-    padding: 1rem 0.5rem;
-
-    &:focus,
-    &:not(:placeholder-shown) {
-      outline: none;
-      border-bottom: 2px solid var(--color-mixed-200);
-      ~ label {
-        top: -18px;
-      }
-    }
-
-    &:hover {
-      border-bottom: 2px solid var(--color-mixed-200);
-    }
-  }
-
-  p {
-    display: inline;
-  }
-
   label {
     position: absolute;
     top: 24px;
@@ -54,12 +25,36 @@
 
   &--invalid input,
   &--invalid textarea {
-    border-bottom: 2px solid var(--color-error-300);
+    border-bottom: 2px solid var(--color-error-300) !important;
   }
 
   input {
     height: 54px;
     vertical-align: bottom;
+  }
+
+  input,
+  textarea {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    font: inherit;
+    border: none;
+    border-bottom: 2px solid #657786;
+    background: #f5f8fa;
+    padding: 1rem 0.5rem;
+
+    &:focus,
+    &:not(:placeholder-shown) {
+      outline: none;
+      border-bottom: 2px solid var(--color-mixed-200);
+      ~ label {
+        top: -18px;
+      }
+    }
+  }
+  p {
+    display: inline;
   }
 }
 
