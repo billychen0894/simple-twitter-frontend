@@ -17,7 +17,7 @@ import {
 import styles from 'users/components/TweetEditProfileModal/TweetEditProfileModal.module.scss';
 
 function TweetEditProfileModal() {
-  const { user, setUser } = useUsers();
+  const { user, setUser, fetchUserTweets } = useUsers();
   const { updateUserProfile } = useUsers();
   const [userProfileInputError, setUserProfileInputError] = useState(false);
   const navigate = useNavigate();
@@ -123,14 +123,14 @@ function TweetEditProfileModal() {
 
         if (coverImageFile) {
           newCoverImage = URL.createObjectURL(coverImageFile);
+          setUser((prev) => {
+            return { ...prev, coverImage: newCoverImage };
+          });
         }
-
-        setUser((prev) => {
-          return { ...prev, coverImage: newCoverImage };
-        });
 
         setUploadedAvatarImage(newAvatarImage);
         navigate(-1);
+        await fetchUserTweets(user?.id);
       }
     } catch (error) {
       toast.error('出現錯誤，請稍後再試！');
