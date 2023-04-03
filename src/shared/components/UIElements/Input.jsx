@@ -72,11 +72,12 @@ function Input({
       <input
         id={id}
         type={type}
-        placeholder={placeholder}
+        placeholder={type === 'text' ? placeholder : undefined}
         onChange={handleInputChange}
-        onBlur={handleInputTouch}
+        onBlur={type === 'text' ? handleInputTouch : undefined}
         value={inputState.val}
         style={inputInlineStyle}
+        accept={type === 'file' ? '.png, .jpg, .jpeg' : undefined}
       />
     ) : (
       <textarea

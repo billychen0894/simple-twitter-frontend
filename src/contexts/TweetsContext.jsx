@@ -135,7 +135,7 @@ export function TweetsProvider({ children }) {
           setTweets(updatedTweets);
         }
 
-        setReplies([...replies, { ...response, User: { name, account } }]);
+        setReplies([{ ...response, User: { name, account } }, ...replies]);
       } catch (error) {
         console.error(error);
       }

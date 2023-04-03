@@ -26,7 +26,7 @@ function UserProfileHeader() {
     userFollowings,
     userFollowers,
   } = useUsers();
-  const { id: currentUserId } = currentUser;
+  const currentUserId = currentUser?.id;
 
   useEffect(() => {
     fetchUserFollowers(userId);

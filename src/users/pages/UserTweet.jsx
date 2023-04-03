@@ -24,7 +24,11 @@ function UserTweet() {
   return (
     <div className={styles.tweet}>
       <TweetHeader label="首頁" />
-      <TweetPost placeholder="有什麼新鮮事嗎?" userId={currentUser?.id} />
+      <TweetPost
+        placeholder="有什麼新鮮事嗎?"
+        userId={currentUser?.id}
+        image={currentUser?.avatar}
+      />
       {!isLoading ? (
         <TweetList listType="homeTweets" listItems={tweets} />
       ) : undefined}

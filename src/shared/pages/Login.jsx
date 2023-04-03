@@ -13,6 +13,7 @@ import useForm from 'hooks/useForm';
 import { useAuth } from 'contexts/AuthContext';
 import styles from 'shared/pages/Login.module.scss';
 import 'styles/global.scss';
+import { toast } from 'react-toastify';
 
 function Login() {
   const initialFormInputs = {
@@ -34,6 +35,7 @@ function Login() {
     e.preventDefault();
 
     if (!formState.formIsValid) {
+      toast.error('請確保輸入欄位皆正確!');
       return;
     }
 
@@ -84,7 +86,7 @@ function Login() {
               validators={[VALIDATOR_REQUIRE(), VALIDATOR_MAXLENGTH(16)]}
               onInput={handleInput}
               errorText={
-                formState.inputs.password.val > 16
+                formState.inputs.password.val.length > 16
                   ? '密碼不能超過16個字數'
                   : '請輸入密碼'
               }
