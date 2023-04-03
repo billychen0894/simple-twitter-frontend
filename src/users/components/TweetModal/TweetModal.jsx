@@ -93,6 +93,7 @@ function TweetModal() {
         onInputChange={handleInputChange}
         onInputTouch={handleInputTouch}
         inputValue={input}
+        currUserAvatar={currentUser?.avatar}
       />
     ) : (
       <MoonLoader

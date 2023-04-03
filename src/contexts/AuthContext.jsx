@@ -245,6 +245,7 @@ export function AuthProvider({ children }) {
       isAuthenticated,
       role,
       currentUser: payload,
+      setCurrentUser: setPayload,
       isLoading,
       register: registerHandler,
       userLogin: userLoginHandler,
@@ -260,6 +261,7 @@ export function AuthProvider({ children }) {
     logoutHandler,
     role,
     isLoading,
+    setPayload,
   ]);
 
   return (

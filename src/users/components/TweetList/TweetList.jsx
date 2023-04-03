@@ -80,6 +80,7 @@ function TweetList({ listType, followType, currentAccountName, listItems }) {
           currentAccountName={item?.User.account}
           tweetRepliedUserAccount={currentAccountName}
           userId={item?.UserId}
+          tweetRepliedUserAvatar={item?.User.avatar}
         />
       );
     });

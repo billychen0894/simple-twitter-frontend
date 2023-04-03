@@ -12,6 +12,7 @@ function TweetReplyModal({
   onInputChange,
   inputValue,
   onInputTouch,
+  currUserAvatar,
 }) {
   return (
     <div className={styles.modalReplyContentContainer}>
@@ -43,7 +44,7 @@ function TweetReplyModal({
       </div>
       <div className={styles.tweetReplyContainer}>
         <div className={styles.avatarContainer}>
-          <Avatar className={styles.userAvatar} />
+          <Avatar className={styles.userAvatar} image={currUserAvatar} />
         </div>
         <div className={styles.tweetPostContainer}>
           <TweetEditor
