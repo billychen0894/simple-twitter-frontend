@@ -110,7 +110,7 @@ export function TweetsProvider({ children }) {
           return;
         }
 
-        const { name, account } = decode(authToken);
+        const { name, account, avatar } = decode(authToken);
 
         const response = await sendRequest(
           `/tweets/${tweetId}/replies`,
@@ -135,7 +135,10 @@ export function TweetsProvider({ children }) {
           setTweets(updatedTweets);
         }
 
-        setReplies([{ ...response, User: { name, account } }, ...replies]);
+        setReplies([
+          { ...response, User: { name, account, avatar } },
+          ...replies,
+        ]);
       } catch (error) {
         console.error(error);
       }
