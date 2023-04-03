@@ -281,6 +281,7 @@ export function UsersProvider({ children }) {
       updateUserFollow,
       deleteUserFollow,
       fetchTop10Users,
+      setUser,
     };
   }, [
     user,
@@ -303,6 +304,7 @@ export function UsersProvider({ children }) {
     updateUserFollow,
     deleteUserFollow,
     fetchTop10Users,
+    setUser,
   ]);
   return (
     <UsersContext.Provider value={userContext}>

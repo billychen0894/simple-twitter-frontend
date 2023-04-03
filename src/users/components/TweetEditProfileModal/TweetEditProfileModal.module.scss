@@ -35,7 +35,9 @@
   z-index: 10;
 
   .cameraIcon {
+    position: relative;
     margin-right: 3rem;
+    top: 4px;
   }
 }
 .avatarIconContainer {

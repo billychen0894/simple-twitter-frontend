@@ -16,25 +16,65 @@ import {
 } from 'shared/utils/validators';
 import styles from 'users/components/TweetEditProfileModal/TweetEditProfileModal.module.scss';
 
-function TweetEditProfileModal({ profileHeaderImage, avatar }) {
-  const { user } = useUsers();
+function TweetEditProfileModal() {
+  const { user, setUser } = useUsers();
   const { updateUserProfile } = useUsers();
   const [userProfileInputError, setUserProfileInputError] = useState(false);
   const navigate = useNavigate();
   const nameInitialValue = user?.name || '';
   const introInitialValue = user?.introduction || '';
+  const [avatarFile, setAvatarFile] = useState(null);
+  const [avatarBase64, setAvatarBase64] = useState(user?.avatar || '');
+
+  const [coverImageFile, setCoverImageFile] = useState(null);
+  const [coverImageBase64, setCoverImageBase64] = useState(
+    user?.coverImage || ''
+  );
+
+  async function readFileAsDataURL(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  const handleFileInputChange = async (event, inputId) => {
+    const file = event.target.files[0];
+
+    if (!file) {
+      return;
+    }
+
+    if (!file.type.startsWith('image/')) {
+      toast.error('Please select an image file');
+      return;
+    }
+
+    const base64Data = await readFileAsDataURL(file);
+
+    if (inputId === 'avatar') {
+      setAvatarFile(file);
+      setAvatarBase64(base64Data);
+    } else if (inputId === 'coverImage') {
+      setCoverImageFile(file);
+      setCoverImageBase64(base64Data);
+    }
+  };
 
   const initialFormInputs = {
     name: {
-      val: user?.name || '',
-      isValid: user?.name || false,
+      val: nameInitialValue,
+      isValid: nameInitialValue.length >= 0,
     },
     intro: {
-      val: user?.introduction || '',
-      isValid: user?.introduction || false,
+      val: introInitialValue,
+      isValid: introInitialValue.length >= 0,
     },
   };
   const [formState, handleInput] = useForm(initialFormInputs, false);
+  const [uploadedAvatarImage, setUploadedAvatarImage] = useState(null);
 
   const handleSubmitForm = async (e) => {
     e.preventDefault();
@@ -44,24 +84,56 @@ function TweetEditProfileModal({ profileHeaderImage, avatar }) {
       return;
     }
 
-    const response = await updateUserProfile({
-      name: formState.inputs.name.val,
-      introduction: formState.inputs.intro.val,
-      avatar,
-      cover_image: profileHeaderImage,
-    });
-
-    const { success } = response;
-
-    if (!success) {
-      setUserProfileInputError(true);
-      toast.error('編輯失敗');
-      return;
+    const formData = new FormData();
+    formData.append('name', formState.inputs.name.val);
+    formData.append('introduction', formState.inputs.intro.val);
+    if (avatarFile) {
+      formData.append('avatar', avatarFile);
+    } else {
+      formData.append('avatarBase64', avatarBase64);
+    }
+    if (coverImageFile) {
+      formData.append('cover_image', coverImageFile);
+    } else {
+      formData.append('coverImageBase64', coverImageBase64);
     }
 
-    if (success) {
-      navigate(-1);
-      toast.success('編輯成功');
+    try {
+      const uploadPromise = updateUserProfile(formData);
+      toast.promise(uploadPromise, {
+        pending: '正在上傳中...',
+        success: '編輯成功!',
+        error: '上傳出現錯誤，請稍後再試！',
+      });
+      const { success } = await uploadPromise;
+
+      if (!success) {
+        setUserProfileInputError(true);
+        toast.error('編輯失敗');
+        return;
+      }
+
+      let newCoverImage;
+      let newAvatarImage;
+
+      if (success) {
+        if (avatarFile) {
+          newAvatarImage = URL.createObjectURL(avatarFile);
+        }
+
+        if (coverImageFile) {
+          newCoverImage = URL.createObjectURL(coverImageFile);
+        }
+
+        setUser((prev) => {
+          return { ...prev, coverImage: newCoverImage };
+        });
+
+        setUploadedAvatarImage(newAvatarImage);
+        navigate(-1);
+      }
+    } catch (error) {
+      toast.error('出現錯誤，請稍後再試！');
     }
   };
 
@@ -73,12 +145,21 @@ function TweetEditProfileModal({ profileHeaderImage, avatar }) {
           className={styles.headerImage}
           style={{
             backgroundImage: `url(${
-              profileHeaderImage || defaultProfileHeaderImage
+              coverImageBase64 || defaultProfileHeaderImage
             })`,
           }}
         />
         <div className={styles.headerImageIconContainer}>
-          <CameraIcon className={styles.cameraIcon} />
+          <label htmlFor="coverImage">
+            <input
+              id="coverImage"
+              type="file"
+              accept=".png,.jpg,.jpeg"
+              onChange={(e) => handleFileInputChange(e, 'coverImage')}
+              style={{ display: 'none' }}
+            />
+            <CameraIcon className={styles.cameraIcon} />
+          </label>
           <CloseIcon className={styles.closeIcon} />
         </div>
       </div>
@@ -88,11 +169,20 @@ function TweetEditProfileModal({ profileHeaderImage, avatar }) {
           <Avatar
             className={styles.avatar}
             overlayStyles={styles.overlay}
-            image={avatar}
+            image={uploadedAvatarImage || avatarBase64 || undefined}
             defaultAvatarStyle={styles.defaultAvatar}
           />
           <div className={styles.avatarIconContainer}>
-            <CameraIcon className={styles.cameraIcon} />
+            <label htmlFor="avatar">
+              <input
+                id="avatar"
+                type="file"
+                accept=".png,.jpg,.jpeg"
+                onChange={(e) => handleFileInputChange(e, 'avatar')}
+                style={{ display: 'none' }}
+              />
+              <CameraIcon className={styles.cameraIcon} />
+            </label>
           </div>
         </div>
         <form
