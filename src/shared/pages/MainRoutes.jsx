@@ -15,6 +15,7 @@ import UserTweet from 'users/pages/UserTweet';
 import UserTweetReply from 'users/pages/UserTweetReply';
 import PrivateRoutes from 'shared/utils/PrivateRoutes';
 import AdminRootLayout from 'admin/pages/AdminRootLayout';
+import Unauthorized from './Unauthorized';
 
 function MainRoutes({ location }) {
   const { currentUser } = useAuth();
@@ -24,7 +25,7 @@ function MainRoutes({ location }) {
       <Route path="login" element={<Login />} />
       <Route path="admin_login" element={<AdminLogin />} />
       <Route path="register" element={<Register />} />
-      <Route path="/unauthorized" element={<div>unauthorized</div>} />
+      <Route path="/unauthorized" element={<Unauthorized />} />
       <Route path="*" element={<Navigate to="login" />} />
 
       <Route element={<PrivateRoutes allowedRoles="admin" />}>
