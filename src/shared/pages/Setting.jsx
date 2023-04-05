@@ -81,7 +81,7 @@ function Setting({ userData }) {
             label="帳號"
             element="input"
             type="text"
-            placeholder=""
+            placeholder=" "
             validators={[VALIDATOR_REQUIRE(), VALIDATOR_MAXLENGTH(16)]}
             onInput={handleInput}
             errorText={
@@ -101,7 +101,7 @@ function Setting({ userData }) {
             label="名稱"
             element="input"
             type="text"
-            placeholder=""
+            placeholder=" "
             validators={[VALIDATOR_REQUIRE(), VALIDATOR_MAXLENGTH(50)]}
             onInput={handleInput}
             errorText={
@@ -121,7 +121,7 @@ function Setting({ userData }) {
             label="Email"
             element="input"
             type="email"
-            placeholder=""
+            placeholder=" "
             validators={[VALIDATOR_REQUIRE(), VALIDATOR_EMAIL()]}
             onInput={handleInput}
             errorText={
@@ -141,7 +141,7 @@ function Setting({ userData }) {
             label="密碼"
             element="input"
             type="password"
-            placeholder=""
+            placeholder=" "
             validators={[VALIDATOR_REQUIRE(), VALIDATOR_MAXLENGTH(16)]}
             onInput={handleInput}
             errorText={
@@ -161,7 +161,7 @@ function Setting({ userData }) {
             label="密碼確認"
             element="input"
             type="password"
-            placeholder=""
+            placeholder=" "
             validators={[
               VALIDATOR_REQUIRE(),
               VALIDATOR_MAXLENGTH(16),

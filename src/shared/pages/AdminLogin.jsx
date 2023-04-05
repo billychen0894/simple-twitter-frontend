@@ -64,7 +64,7 @@ function AdminLogin() {
               label="帳號"
               element="input"
               type="text"
-              placeholder=""
+              placeholder=" "
               validators={[VALIDATOR_REQUIRE(), VALIDATOR_MAXLENGTH(16)]}
               onInput={handleInput}
               errorText={
@@ -82,7 +82,7 @@ function AdminLogin() {
               label="密碼"
               element="input"
               type="password"
-              placeholder=""
+              placeholder=" "
               validators={[VALIDATOR_REQUIRE(), VALIDATOR_MAXLENGTH(16)]}
               onInput={handleInput}
               errorText={

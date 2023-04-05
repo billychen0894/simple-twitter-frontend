@@ -195,7 +195,7 @@ function TweetEditProfileModal() {
             label="名稱"
             element="input"
             type="text"
-            placeholder=""
+            placeholder=" "
             initialValue={nameInitialValue}
             initialValid={nameInitialValue.length >= 0}
             currTextLength={formState.inputs.name.val.length || 0}
@@ -216,7 +216,7 @@ function TweetEditProfileModal() {
           <Input
             id="intro"
             label="自我介紹"
-            placeholder=""
+            placeholder=" "
             initialValue={introInitialValue}
             initialValid={introInitialValue.length >= 0}
             currTextLength={formState.inputs.intro.val.length || 0}
